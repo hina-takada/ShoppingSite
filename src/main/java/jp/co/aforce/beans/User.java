@@ -12,6 +12,7 @@ public class User {
 	private String firstName;//名前_名
 	private String address;//住所
 	private String mailAddress;//メースアドレス
+	private String role;//権限(user/admin)
 	
 	
 	/*
@@ -74,4 +75,14 @@ public class User {
 		this.mailAddress = mailAddress;
 	}
 	
+	/**
+	 * 権限のget set
+	 * @return 権限を返す
+	 */
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

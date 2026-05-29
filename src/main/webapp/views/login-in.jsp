@@ -17,6 +17,5 @@
 		<input type="submit" value="ログイン"><br>
 		<input type="button" value="新規登録">
 	</form>
-	
 </body>
 </html>
