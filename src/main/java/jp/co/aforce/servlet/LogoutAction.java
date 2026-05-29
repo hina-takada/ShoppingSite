@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import jp.co.aforce.beans.User;
+
 /**
  * Servlet implementation class LogoutAction
  */
@@ -18,13 +20,16 @@ public class LogoutAction extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 
-		if(session != null) {
+		if(user != null) {
 			session.invalidate();
 			response.sendRedirect("logout-in.jsp");
+			return;
 		}
 		
 		request.getRequestDispatcher("logout-error.jsp")

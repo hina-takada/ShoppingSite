@@ -1,10 +1,7 @@
 package jp.co.aforce.servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -103,21 +100,7 @@ public class LoginAction extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void browser(HttpServletRequest request,HttpServletResponse response,
 			HttpSession session,String id) throws Exception{
-		ServletContext application = getServletContext();
 		
-		Map<String, HttpSession> loginUsers = 
-				(Map<String, HttpSession>)application.getAttribute("loginUsers");
-		
-		if(loginUsers == null) {
-			loginUsers = new HashMap<>();
-			application.setAttribute("loginUsers", loginUsers);
-		}
-		
-		if(loginUsers.containsKey(id)) {
-			request.setAttribute("error","既にログイン中です");
-			request.getRequestDispatcher("browser-error.jsp").forward(request, response);
-			return;
-		}
 		
 	}
 
