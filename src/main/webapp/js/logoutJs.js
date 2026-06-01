@@ -1,6 +1,6 @@
 //DOMConten..:Webページ(画像などのリソースは含まれない)の読み込み完了で出力
 //画面を含む場合は,loadを使用
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("load", function() {
 	const dialog = document.getElementById("myDialog");
 	const logout = document.getElementById("logout");
 	const okBtu = document.getElementById("okBtu");
@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	});
 
 	okBtu.addEventListener("click", function() {
-		window.location.href = "logout";
+		window.location.href = "Logout.action";
 	});
 
 });

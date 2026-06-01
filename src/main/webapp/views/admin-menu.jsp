@@ -9,11 +9,18 @@
 </head>
 <body>
 	
-	<h3>ようこそ${user.getLastName()}さん!</h3>
+	<h3>
+		<c:out value="ようこそ${user.getLastName()}さん!"></c:out>
+	</h3>
 	
 	<button>修正</button>
 	<button>削除</button>
-	<button>ログアウト</button>
+	<button>商品管理</button>
+	<button type="button" id="logout">ログアウト</button>
 	
+	<%@ include file="../tool/dialog.jsp" %>
+	
+	<script src="../js/logoutJs.js"></script>
+	<script src="../js/.js"></script>
 </body>
 </html>

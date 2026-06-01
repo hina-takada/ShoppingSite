@@ -1,107 +1,69 @@
 package jp.co.aforce.servlet;
 
-import java.io.IOException;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.aforce.beans.User;
 import jp.co.aforce.dao.UserDAO;
+import jp.co.aforce.tool.Action;
+import jp.co.aforce.tool.SessionManager;
 
-/**
- * Servlet implementation class UserBeen
- * 
- * ログイン画面の遷移
- */
-@WebServlet("/views/loginaction")
-public class LoginAction extends HttpServlet {
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+public class LoginAction extends Action {
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-
+		
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 
-		if (id == null || id.isBlank() || id.length() > 10) {
+		//入力バリデーション
+		if (id == null || id.isBlank() ||id.length() < 4 || id.length() > 10) {
 			request.getRequestDispatcher("login-error.jsp")
 					.forward(request, response);
 		}
 
-		if (pass == null || pass.isBlank() || pass.length() > 32) {
+		if (pass == null || pass.isBlank() || pass.length() < 5 || pass.length() > 32) {
 			request.getRequestDispatcher("login-error.jsp")
 					.forward(request, response);
 		}
+
 		
-		/**
-		 * ログイン処理
-		 * 
-		 */
-		try {
-			browser(request, response, session, id);
-			
-			UserDAO dao = new UserDAO();
-			User user = dao.login(id, pass);
+		UserDAO dao = new UserDAO();
+		User user = dao.login(id, pass);
 
-			validation(request, response, user, session);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
-
+		String url = validation(request, response, user,session);
+		return url;
 	}
-	
+
 	//ログインのバリデーション
-	private void validation(HttpServletRequest request,HttpServletResponse response,
-			User u,HttpSession session) throws Exception {
+	private String validation(HttpServletRequest request, HttpServletResponse response,
+			User user, HttpSession session) throws Exception {
 		final String ADMIN = "ADMIN";
 		
-		if(u == null) {
-			request.getRequestDispatcher("login-error.jsp")
-			.forward(request, response);
-			return;
+		if(user == null) {
+			return "login-error.jsp";
 		}
+
+		//別ブラウザで同じIDがログイン中(今後クッキー追加)
+		HttpSession oldSession = SessionManager.loginUsers.get(user.getId());
+		if (oldSession != null && oldSession != session)
+			return "test-error.jsp";
+
 		
-		session.setAttribute("user", u);
+		//ログイン成功処理
+		session.setAttribute("user", user);//セッションスコープ
+		session.setMaxInactiveInterval(10);//仮置き
+		SessionManager.loginUsers.put(user.getId(), session);//セッションを登録
+
+		//メニュー処理
+		if (ADMIN.equals(user.getRole()))
+			return "admin-menu.jsp";
 		
-		if (ADMIN.equals(u.getRole())) {
-			response.sendRedirect("admin-menu.jsp");
-		}
-			response.sendRedirect("user-menu.jsp");;
-		
-	}
-	
-	
-	/**
-	 * 異なるブラウザが同じIDにログインする場合の処理
-	 * 
-	 * @param request
-	 * @param response
-	 * @param session
-	 * @param id
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
-	private void browser(HttpServletRequest request,HttpServletResponse response,
-			HttpSession session,String id) throws Exception{
-		
-		
+		return "user-menu.jsp";
+
 	}
 
+	
 }

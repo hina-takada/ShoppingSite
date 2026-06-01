@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,7 @@
 </head>
 <body>
 	
-	<h2>ログインエラー画面</h2>
-	
-	<p>IDもしくはパスワードが違います</p>
+	<h2>すでにログインしています</h2>
 	
 	<a href="login-in.jsp">
 	<button>ログイン画面へ戻る</button>

@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+/*.errorMsg{
+	display: none;
+	color: red !important;
+	font-size: 12px;
+}
+
+#login-btu:disabled{
+	background-color: aliceblue;
+	cursor: not-allowed;
+}*/
+
+body{
+	margin: 0;
+	background-color: rgb(252, 241, 220);
+}
+
+.login-main{
+	margin: 0 5rem;
+	padding: 2rem 0;
+	font-family: "Yu Gothic" ;
+	
+	/*画面中央*/
+	display: grid;
+	place-items: center;
+	height: 90vh;
+}
+
+/*全体のカード*/
+.login-card {
+	width: 100%;
+	height: 100%;
+}
+
+/*タイトル*/
+.login-title {
+	margin: 0;
+	font-size: 1rem;
+	color: rgb(50, 26, 7);
+	text-align: left;
+}
+
+/*フォーム全体*/
+.login-form{
+	display: grid;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	
+	
+	background-color: #FFB6C1;
+	border-radius: 12px;
+}
+
+/*1行単位*/
+.form-group{
+	display: grid;
+	padding: 0.7rem 0.3rem 0 0.3rem;
+}
+
+/*ﾗﾍﾞﾙ*/
+.form-label{
+	font-size: 0.6rem;
+	
+}
+
+.login-text{
+	padding: 0.5rem;
+}
+	
+/*ボタン*/
+.form-action{
+	display: grid;
+	place-items: center;
+	margin-top: 3rem;
+	padding-bottom: 1rem;
+}
+
+.form-action input{
+	padding: 0.6rem 3rem;
+}
+
+
+
+
+
+
+
+
+
+

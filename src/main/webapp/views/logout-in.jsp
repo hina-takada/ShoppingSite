@@ -14,5 +14,6 @@
 	<p>ログアウトしました</p>
 	<a href="login-in.jsp"><button>ログイン画面に戻る</button></a>
 	
+	<script src="../js/logoutJs.js"></script>
 </body>
 </html>

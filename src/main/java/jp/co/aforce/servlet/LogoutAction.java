@@ -1,47 +1,31 @@
 package jp.co.aforce.servlet;
 
-import java.io.IOException;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.aforce.beans.User;
+import jp.co.aforce.tool.Action;
+import jp.co.aforce.tool.SessionManager;
 
-/**
- * Servlet implementation class LogoutAction
- */
-@WebServlet("/views/logout")
-public class LogoutAction extends HttpServlet {
+public class LogoutAction extends Action {
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@SuppressWarnings("unused")
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 
 		if(user != null) {
+			SessionManager.removeUser(user.getId());
 			session.invalidate();
-			response.sendRedirect("logout-in.jsp");
-			return;
+			return "logout-in.jsp";
 		}
 		
-		request.getRequestDispatcher("logout-error.jsp")
-		.forward(request, response);
-		
+		return "logout-error.jsp";
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
+
+	
 
 }
