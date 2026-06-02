@@ -12,7 +12,7 @@ import jp.co.aforce.beans.User;
 public class UserDAO extends DAO {
 	
 	/**
-	 * 全データを取得
+	 * ログインするデータを取得
 	 * 
 	 * @param id　入力されたIDを取得
 	 * @param pass　入力されたPS
@@ -36,9 +36,6 @@ public class UserDAO extends DAO {
 			u.setPass(rs.getString("PASSWORD"));
 			u.setLastName(rs.getString("LAST_NAME"));
 			u.setRole(rs.getString("role"));
-			/*u.setFirstName(rs.getString("FIRST_NAME"));
-			u.setAddress(rs.getString("ADDRESS"));
-			u.setMailAddress(rs.getString("MAIL_ADDRESS"));*/
 		}
 		
 		ps.close();
@@ -46,4 +43,24 @@ public class UserDAO extends DAO {
 		return u;
 	}
 	
+	
+	public int insert(String id,String pass,String lastName,
+			String firstName,String address,String mailAddress) throws Exception {
+		
+		Connection con = getConnection();
+		
+		PreparedStatement ps = con.prepareStatement
+			("INSERT INTO users (MEMBER_ID,PASSWORD,LAST_NAME,FIRST_NAME,ADDRESS,MAIL_ADDRESS) VALUES (?,?,?,?,?,?)");
+		ps.setString(1, id);
+		ps.setString(2, pass);
+		ps.setString(3, lastName);
+		ps.setString(4, firstName);
+		ps.setString(5, address);
+		ps.setString(6, mailAddress);
+		int line = ps.executeUpdate();
+		
+		
+		
+		return line;		
+	}
 }

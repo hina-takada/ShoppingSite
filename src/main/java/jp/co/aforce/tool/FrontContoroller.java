@@ -31,10 +31,9 @@ public class FrontContoroller extends HttpServlet {
 				response.sendRedirect(url);
 				return;
 			}
-			
-			if(url.contains("-error")){
+
 				request.getRequestDispatcher(url).forward(request, response);
-			}
+				return;
 			
 		} catch (Exception e) {
 			e.printStackTrace();

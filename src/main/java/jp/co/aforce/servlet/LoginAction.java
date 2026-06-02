@@ -20,13 +20,11 @@ public class LoginAction extends Action {
 
 		//入力バリデーション
 		if (id == null || id.isBlank() ||id.length() < 4 || id.length() > 10) {
-			request.getRequestDispatcher("login-error.jsp")
-					.forward(request, response);
+			return "login-error.jsp";
 		}
 
-		if (pass == null || pass.isBlank() || pass.length() < 5 || pass.length() > 32) {
-			request.getRequestDispatcher("login-error.jsp")
-					.forward(request, response);
+		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32) {
+			return "login-error.jsp";
 		}
 
 		
@@ -54,7 +52,7 @@ public class LoginAction extends Action {
 		
 		//ログイン成功処理
 		session.setAttribute("user", user);//セッションスコープ
-		session.setMaxInactiveInterval(10);//仮置き
+		session.setMaxInactiveInterval(60*10);//仮置き
 		SessionManager.loginUsers.put(user.getId(), session);//セッションを登録
 
 		//メニュー処理

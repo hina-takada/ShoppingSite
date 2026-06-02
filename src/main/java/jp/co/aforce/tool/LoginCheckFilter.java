@@ -14,33 +14,37 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class LoginCheckFilter
- */
-@WebFilter("/views/*")
+	* Servlet Filter implementation class LoginCheckFilter
+	*/
+
+@WebFilter("/")
 public class LoginCheckFilter extends HttpFilter implements Filter {
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+/**
+	@see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	*/
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+		
 		HttpServletRequest request2 = (HttpServletRequest)request;
 		HttpServletResponse response2 = (HttpServletResponse)response;
 		
 		String uri = request2.getRequestURI();
 		
 		if(uri.endsWith("login-in.jsp") || uri.endsWith("Login.action")) {
-			chain.doFilter(request, response);
-			return;
+		chain.doFilter(request, response);
+		return;
 		}
 		
 		HttpSession session = request2.getSession(false);
 		
 		if(session == null || session.getAttribute("user") == null) {
-			response2.sendRedirect("login-in.jsp");
-			return;
+		response2.sendRedirect("login-in.jsp");
+		return;
 		}
 		
 		chain.doFilter(request, response);
 		
-	}
-
-}
+		}
+		
+		}
+		
