@@ -14,8 +14,8 @@
 	 <c:out value="ようこそ${user.getLastName()}さん!"></c:out>
 	</h3>
 
-	<button>修正</button>
-	<button>削除</button>
+	<button onclick="location.href = 'user-edit.jsp'">修正</button>
+	<button type="button" onclick="location.href = 'userDelete.jsp'">削除</button>
 	<button type="button" id="logout">ログアウト</button>
 	
 	<%@ include file="../tool/dialog.jsp" %>

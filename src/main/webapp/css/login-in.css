@@ -7,7 +7,7 @@
 .errorMsg{
 	display: none;
 	color: red !important;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 #login-btu:disabled{
@@ -100,7 +100,7 @@ body{
 	border-radius: 12px;
 }
 
-/*1行単位*/
+/*/1行単位*/
 .form-group{
 	display: grid;
 	padding: 0.7rem 0.5rem 0 0.5rem;

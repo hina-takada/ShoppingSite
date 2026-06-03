@@ -6,30 +6,43 @@ const errorMsgPass = document.getElementById("errorMsgPass");
 
 const loginBtu = document.getElementById("login-btu");
 
-function valideteInput(input, errorMsg, min, max) {
-	const length = input.value.length;
+function valideteInput(input, errorMsg, min, max,regex) {
+	const value = input.value;
+	const length = value.length;
+	
+	if(length == 0){
+		errorMsg.style.display = "none";
+		return false;
+	}
+	
+	if(!regex.test(value)){
+			errorMsg.textContent = "英数字を1文字以上含めてください";
+			errorMsg.style.display = "block";
+			return false;	
+		}
 
 	if (length < min || length > max) {
+		errorMsg.textContent = `${min}～${max}文字以内で入力してください`;
 		errorMsg.style.display = "block";
 		return false;
 	}
+	
+	//OK
 	errorMsg.style.display = "none";
 	return true;
 }
 
 function updateLoginBtton() {
-	const maxId = 10;
-	const minId = 4;
-	const maxPass = 32;
-	const minPass = 8;
-
-	const isIdValid = valideteInput(formId, errorMsgId, minId, maxId);
-	const isPassValid = valideteInput(formPass, errorMsgPass, minPass, maxPass);
+	const isIdValid = valideteInput(formId, errorMsgId, 4, 10,/^(?=.*[a-zA-Z0-9]).+$/);
+	const isPassValid = valideteInput(formPass, errorMsgPass, 8, 32,/^(?=.*[a-zA-Z0-9]).+$/);
 
 	loginBtu.disabled = !(isIdValid && isPassValid);
 }
 
 formId.addEventListener("input", updateLoginBtton);
 formPass.addEventListener("input", updateLoginBtton);
+
+
+
 
 

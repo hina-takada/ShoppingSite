@@ -22,15 +22,17 @@
 				<div class="form-group">
 					<label class="form-label">会員ID</label>
 					<!-- 半角英数文字 -->
-					<input id="form-id" class="login-text" type="text" name="id" placeholder="ID入力">
-					<div id="errorMsgId" class="errorMsg">4～10文字で入力してください</div>
+					<input id="form-id" class="login-text" type="text" name="id" placeholder="ID入力" >
+					<i class="fa-solid fa-eye-slash"></i>
+					<div id="errorMsgId" class="errorMsg"></div>
 				</div>
 
 				<div class="form-group">
 					<!-- 半角英数文字 -->
-					<label class="form-label">パスワード</label> <input id="form-pass"
-						class="login-text" type="password" name="pass" placeholder="パスワード入力">
-					<div id="errorMsgPass" class="errorMsg">5～32文字で入力してください</div>
+					<label class="form-label">パスワード</label> 
+					<input id="form-pass" class="login-text" type="password" name="pass" placeholder="パスワード入力">
+					<i class="fa-solid fa-eye-slash"></i>
+					<div id="errorMsgPass" class="errorMsg"></div>
 				</div>
 
 				<div class="form-action">
@@ -42,7 +44,7 @@
 		</div>
 			
 		<div class="link-area">
-			<a href=<c:url value='/views/userAdd.jsp'/>>新規会員登録</a>
+			<a href=<c:url value='/views/user-add.jsp'/>>新規会員登録</a>
 		</div>
 		
 	</main>

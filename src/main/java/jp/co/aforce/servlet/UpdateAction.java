@@ -8,24 +8,25 @@ import jp.co.aforce.beans.User;
 import jp.co.aforce.dao.UserDAO;
 import jp.co.aforce.tool.Action;
 
-public class AddAction extends Action{
+public class UpdateAction extends Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-
+		
 		User user = (User)session.getAttribute("user");
+		
+		if(user == null) return "-error.jsp";
+		
 		UserDAO dao = new UserDAO();
-		int line = dao.insert(user.getId(), user.getPass(), user.getLastName(), 
-				user.getFirstName(), user.getAddress(), user.getMailAddress());
+		int line = dao.update(user.getId(),user.getLastName(),user.getFirstName()
+				,user.getAddress(),user.getMailAddress());
 		
-		if(line < 0) return "registered-error.jsp";
+		if(line < 0) return "-error.jsp";
 		
-		session.removeAttribute("user");
+		session.setAttribute("user", user);
 		
-		return "user-success.jsp";
+		return "edit-success.jsp";
 	}
-	
-	
 
 }

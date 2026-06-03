@@ -29,7 +29,7 @@ public class LoginAction extends Action {
 
 		
 		UserDAO dao = new UserDAO();
-		User user = dao.login(id, pass);
+		User user = dao.serch(id, pass);
 
 		String url = validation(request, response, user,session);
 		return url;

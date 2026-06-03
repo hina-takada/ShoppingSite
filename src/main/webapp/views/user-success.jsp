@@ -12,7 +12,7 @@
 	<h1>新規会員登録完了</h1>
 	
 	
-	<a href="">ログイン画面に戻る</a>
+	<a href="login-in.jsp">ログイン画面に戻る</a>
 	
 </body>
 </html>

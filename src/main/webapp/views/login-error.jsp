@@ -16,5 +16,9 @@
 	<button>ログイン画面へ戻る</button>
 	</a>
 	
+	<!-- <button type="button" onclick="location.href='user-add.jsp'">
+	  戻る
+	 </button> -->
+	
 </body>
 </html>

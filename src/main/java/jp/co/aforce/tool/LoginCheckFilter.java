@@ -23,7 +23,6 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	@see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	*/
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
 		
 		HttpServletRequest request2 = (HttpServletRequest)request;
 		HttpServletResponse response2 = (HttpServletResponse)response;

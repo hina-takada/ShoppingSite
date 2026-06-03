@@ -27,13 +27,14 @@ public class FrontContoroller extends HttpServlet {
 								getDeclaredConstructor().newInstance(); 
 			String url = action.execute(request, response);
 			
-			if(url.contains("menu") || url.contains("-in")) {
-				response.sendRedirect(url);
-				return;
-			}
-
+			if(url.contains("-error") || url.contains("-validation")) {
 				request.getRequestDispatcher(url).forward(request, response);
 				return;
+			}
+			
+			response.sendRedirect(url);
+			return;
+				
 			
 		} catch (Exception e) {
 			e.printStackTrace();
