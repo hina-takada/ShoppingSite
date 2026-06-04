@@ -19,45 +19,45 @@ public class LoginAction extends Action {
 		String pass = request.getParameter("pass");
 
 		//入力バリデーション
-		if (id == null || id.isBlank() ||id.length() < 4 || id.length() > 10) {
+		if (id == null || id.isBlank() ||id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9].*$")) {
 			return "login-error.jsp";
 		}
 
-		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32) {
+		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !id.matches("^[a-zA-Z0-9].*$")) {
 			return "login-error.jsp";
 		}
 
 		
 		UserDAO dao = new UserDAO();
-		User user = dao.serch(id, pass);
+		User users = dao.serch(id, pass);
 
-		String url = validation(request, response, user,session);
+		String url = validation(request, response, users,session);
 		return url;
 	}
 
 	//ログインのバリデーション
 	private String validation(HttpServletRequest request, HttpServletResponse response,
-			User user, HttpSession session) throws Exception {
+			User users, HttpSession session) throws Exception {
 		final String ADMIN = "ADMIN";
 		
-		if(user == null) {
+		if(users == null) {
 			return "login-error.jsp";
 		}
 
-		//別ブラウザで同じIDがログイン中(今後クッキー追加)
-		HttpSession oldSession = SessionManager.loginUsers.get(user.getId());
-		if (oldSession != null && oldSession != session)
-			return "test-error.jsp";
+			//別ブラウザで同じIDがログイン中(今後クッキー追加)
+			HttpSession oldSession = SessionManager.loginUsers.get(users.getId());
+			if (oldSession != null && oldSession != session)
+				return "test-error.jsp";
 
-		
-		//ログイン成功処理
-		session.setAttribute("user", user);//セッションスコープ
-		session.setMaxInactiveInterval(60*10);//仮置き
-		SessionManager.loginUsers.put(user.getId(), session);//セッションを登録
+			
+			//ログイン成功処理
+			session.setAttribute("user", users);//セッションスコープ
+			session.setMaxInactiveInterval(60*10);//仮置き
+			SessionManager.loginUsers.put(users.getId(), session);//セッションを登録
 
-		//メニュー処理
-		if (ADMIN.equals(user.getRole()))
-			return "admin-menu.jsp";
+			//メニュー処理
+			if (ADMIN.equals(users.getRole()))
+				return "admin-menu.jsp";
 		
 		return "user-menu.jsp";
 

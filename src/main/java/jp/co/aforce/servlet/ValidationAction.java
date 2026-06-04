@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.aforce.beans.User;
+import jp.co.aforce.dao.UserDAO;
 import jp.co.aforce.tool.Action;
 
 public class ValidationAction extends Action {
@@ -42,28 +43,42 @@ public class ValidationAction extends Action {
 
 	//入力バリデーション
 	private String validation(String id, String pass, String lastName, String firstName, String address,
-			String mailAddress) {
+			String mailAddress) throws Exception {
 		String url = "useradd-error.jsp";
+		UserDAO dao = new UserDAO();
+		boolean exeit = dao.serchId(id);
 
-		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^(?=.*[a-zA-Z0-9]).+$"))
+		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || exeit == true || !id.matches("^[a-zA-Z0-9].*$")) {
+			System.out.println("IDエラー");
 			return url;
+		}
 
-		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^(?=.*[a-zA-Z0-9]).+$"))
+		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9].*$")){
+			System.out.println("passエラー");
 			return url;
+		}
+		
+		if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]+$")){
+			System.out.println("lnameエラー");
+			return url;
+		}
 
-		if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]"))
+		if (firstName == null || firstName.isBlank() || firstName.length() > 32 || !firstName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]+$") ){
+			System.out.println("fnameエラー");
 			return url;
+		}
 
-		if (firstName == null || firstName.isBlank() || firstName.length() > 32 || !lastName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]") )
+		if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128){
+			System.out.println("addエラー");
 			return url;
-
-		if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128)
+		}
+		if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || address.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9]+@([A-Za-z0-9.-]+)$")){
+			System.out.println("mailエラー");
 			return url;
-
-		if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || address.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9]+@([A-Za-z0-9.-]+)$"))
-			return url;
+		}
 
 		url = "user-validation.jsp";
 		return url;
 	}
+
 }

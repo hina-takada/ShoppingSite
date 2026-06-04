@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.error {
+	color: red;
+	font-size: 12px;
+	margin-top: 2px;
+}
+
+.is-hidden {
+	display: none;
+}
+
+#vali-btu:disabled {
+	background-color: aliceblue;
+	cursor: not-allowed;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 5px;
+	width: 14rem;
+}

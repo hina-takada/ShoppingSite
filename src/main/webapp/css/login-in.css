@@ -4,30 +4,30 @@
 	box-sizing: border-box;
 }
 
-.errorMsg{
+.errorMsg {
 	display: none;
 	color: red !important;
 	font-size: 10px;
 }
 
-#login-btu:disabled{
+#login-btu:disabled {
 	background-color: aliceblue;
 	cursor: not-allowed;
 }
 
-body{
+body {
 	margin: 0;
 	background-color: rgb(252, 241, 220);
 }
 
-.login-main{
-	font-family: "Yu Gothic" ;
-	
+.login-main {
+	font-family: "Yu Gothic";
+
 	/*画面中央*/
 	display: grid;
 	place-items: center;
 	min-height: 90vh;
-	
+
 	padding-inline: 1rem;
 }
 
@@ -38,7 +38,7 @@ body{
 }
 
 /*input text*/
-.login-text{
+.login-text {
 	width: 100%;
 	padding: 0.5rem;
 }
@@ -52,21 +52,22 @@ body{
 }
 
 /*ﾗﾍﾞﾙ*/
-.form-label{
+.form-label {
 	font-size: 0.7rem;
 }
 
 /*******************
 *Windowが小さい場合*
 ********************/
-@media (max-width: 600px){
+@media (max-width: 600px) {
+
 	/*全体のカード*/
 	.login-card {
 		width: 90vw;
 	}
 
 	/*input text*/
-	.login-text{
+	.login-text {
 		width: 100%;
 		padding: 0.5rem;
 	}
@@ -80,50 +81,61 @@ body{
 	}
 
 	/*ﾗﾍﾞﾙ*/
-	.form-label{
+	.form-label {
 		font-size: 0.7rem;
 	}
 }
+
 /*******************
 *Window 小 ここまで*
 ********************/
 
 /*フォーム全体*/
-.login-form{
+.login-form {
 	width: 100%;
 	display: grid;
 	gap: 1rem;
 	margin-top: 1.5rem;
-	
-	
+
+
 	background-color: #FFB6C1;
 	border-radius: 12px;
 }
 
-/*/1行単位*/
-.form-group{
+/*入力フォーム/1行単位*/
+.form-group {
 	display: grid;
 	padding: 0.7rem 0.5rem 0 0.5rem;
+
 }
 
-	
+.pass_box {
+	position: relative;
+	display: inline-block;
+}
+
+.pass_box input {
+	padding-right: 40px;
+}
+
+.fa {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	color: #999;
+}
+
 /*ボタン*/
-.form-action{
+.form-action {
 	display: grid;
 	place-items: center;
 	margin-top: 3rem;
-	
+
 	padding-bottom: 1rem;
 }
 
-.form-action input{
+.form-action input {
 	padding: 0.6rem 3rem;
 }
-
-
-
-
-
-
-
-

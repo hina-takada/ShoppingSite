@@ -74,6 +74,26 @@ public class UserDAO extends DAO {
 		
 		return line;		
 	}
+	/**
+	 * 同じIDがあるかどうか
+	 * 
+	 * @param id
+	 * @throws Exception
+	 */
+	public boolean serchId(String id) throws Exception {
+		User u = null; 
+		Connection con = getConnection();
+		PreparedStatement ps;
+		
+		ps = con.prepareStatement
+				("SELECT MEMBER_ID FROM users WHERE MEMBER_ID = ?");
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next())return true;
+		
+		return false;
+	}
 	
 	/**
 	 * 会員情報の編集（更新）
