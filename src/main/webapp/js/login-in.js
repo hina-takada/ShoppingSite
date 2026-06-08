@@ -12,13 +12,14 @@ function valideteInput(input, errorMsg, min, max,regex) {
 	const value = input.value;
 	const length = value.length;
 	
+	//最初は
 	if(length == 0){
 		errorMsg.style.display = "none";
 		return false;
 	}
 	
 	if(!regex.test(value)){
-			errorMsg.textContent = "先頭は英数字にしてください";
+			errorMsg.textContent = "半角英数または、先頭に記号は使用しないでください";
 			errorMsg.style.display = "block";
 			return false;	
 		}
@@ -35,8 +36,8 @@ function valideteInput(input, errorMsg, min, max,regex) {
 }
 
 function updateLoginBtton() {
-	const isIdValid = valideteInput(formId, errorMsgId, 4, 10,/^[a-zA-Z0-9].*$/);
-	const isPassValid = valideteInput(formPass, errorMsgPass, 8, 32,/^[a-zA-Z0-9].*$/);
+	const isIdValid = valideteInput(formId, errorMsgId, 4, 10, /^[a-zA-Z0-9]+$/);
+	const isPassValid = valideteInput(formPass, errorMsgPass, 8, 32,/^[a-zA-Z0-9@#$%&]+$/);
 
 	loginBtu.disabled = !(isIdValid && isPassValid);
 }
@@ -47,15 +48,20 @@ formPass.addEventListener("input", updateLoginBtton);
 
 /*パスワード伏*/
 
-const faEye = document.getElementById("fa-eye");
+const eye = document.getElementById("fa-eye");
+const pass = document.getElementById("form-pass");
 
-faEye.addEventListener("click",() => {
-	/*if(){
-		
-	}*/
+eye.addEventListener("click",() => {
+	if(pass.type === "password"){
+		pass.type = "text";
+		eye.classList.remove("fa-eye");
+		eye.classList.add("fa-eye-slash");
+	}else{
+		pass.type = "password";
+		eye.classList.remove("fa-eye-slash");
+		eye.classList.add("fa-eye");
+	}
 });
-
-
 
 
 /*パスワード伏*/

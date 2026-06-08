@@ -16,10 +16,10 @@ public class AddAction extends Action{
 
 		User user = (User)session.getAttribute("user");
 		UserDAO dao = new UserDAO();
-		int line = dao.insert(user.getId(), user.getPass(), user.getLastName(), 
+		boolean line = dao.insert(user.getId(), user.getPass(), user.getLastName(), 
 				user.getFirstName(), user.getAddress(), user.getMailAddress());
 		
-		if(line < 0) return "registered-error.jsp";
+		if(line == false) return "registered-error.jsp";
 		
 		session.removeAttribute("user");
 		

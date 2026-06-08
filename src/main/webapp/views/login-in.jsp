@@ -36,7 +36,7 @@
 					<label class="form-label">パスワード</label> 
 					<div class="pass_box">
 						<input id="form-pass" class="login-text" type="password" name="pass" placeholder="パスワード入力"> 
-						<i id="fa-eye" class="fa" aria-hidden="true"></i>
+						<i id="fa-eye" class="fa fa-eye" aria-hidden="true"></i>
 					</div>
 					<div id="errorMsgPass" class="errorMsg"></div>
 				</div>

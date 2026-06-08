@@ -23,9 +23,9 @@ public class DeleteAction extends Action{
 			return "userDelete-error";
 		}
 		
-		int line = dao.delete(user.getId());
+		boolean line = dao.delete(user.getId());
 		
-		if(line < 0)return "userDelete-error";
+		if(line == false)return "userDelete-error";
 		
 		return "userDeleteSuccess.jsp";
 	}

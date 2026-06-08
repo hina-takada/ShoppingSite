@@ -8,7 +8,7 @@ import jp.co.aforce.beans.User;
 import jp.co.aforce.dao.UserDAO;
 import jp.co.aforce.tool.Action;
 
-public class ValidationAction extends Action {
+public class AddValidationAction extends Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -46,33 +46,34 @@ public class ValidationAction extends Action {
 			String mailAddress) throws Exception {
 		String url = "useradd-error.jsp";
 		UserDAO dao = new UserDAO();
-		boolean exeit = dao.serchId(id);
+		boolean exeit = dao.userCheck(id);
+	
 
-		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || exeit == true || !id.matches("^[a-zA-Z0-9].*$")) {
+		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || exeit == true || !id.matches("^[a-zA-Z0-9]+$")) {
 			System.out.println("IDエラー");
 			return url;
 		}
 
-		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9].*$")){
+		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9@#$%&]+$")){
 			System.out.println("passエラー");
 			return url;
 		}
 		
-		if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]+$")){
+		if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$")){
 			System.out.println("lnameエラー");
 			return url;
 		}
 
-		if (firstName == null || firstName.isBlank() || firstName.length() > 32 || !firstName.matches("^[ぁ-んア-ケ一-龠々A-Za-z]+$") ){
+		if (firstName == null || firstName.isBlank() || firstName.length() > 32 || !firstName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$") ){
 			System.out.println("fnameエラー");
 			return url;
 		}
 
-		if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128){
+		if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128 || !address.matches("^[^<>]+$")){
 			System.out.println("addエラー");
 			return url;
 		}
-		if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || address.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9]+@([A-Za-z0-9.-]+)$")){
+		if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || address.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
 			System.out.println("mailエラー");
 			return url;
 		}

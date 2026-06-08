@@ -56,7 +56,7 @@ public class UserDAO extends DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int insert(String id,String pass,String lastName,
+	public boolean insert(String id,String pass,String lastName,
 			String firstName,String address,String mailAddress) throws Exception {
 		Connection con = getConnection();
 		PreparedStatement ps;
@@ -71,16 +71,19 @@ public class UserDAO extends DAO {
 		ps.setString(6, mailAddress);
 		int line = ps.executeUpdate();
 		
+		if(line < 0) return false;
 		
-		return line;		
+		ps.close();
+		con.close();
+		return true;		
 	}
 	/**
-	 * 同じIDがあるかどうか
+	 * 同じIDとPASSの組み合わせがあるかどうか
 	 * 
 	 * @param id
 	 * @throws Exception
 	 */
-	public boolean serchId(String id) throws Exception {
+	public boolean userCheck(String id) throws Exception {
 		User u = null; 
 		Connection con = getConnection();
 		PreparedStatement ps;
@@ -90,8 +93,10 @@ public class UserDAO extends DAO {
 		ps.setString(1, id);
 		ResultSet rs = ps.executeQuery();
 		
-		if(rs.next())return true;
+		if(rs.next()) return true;
 		
+		ps.close();
+		con.close();
 		return false;
 	}
 	
@@ -107,7 +112,7 @@ public class UserDAO extends DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int update(String id,String lastName,
+	public boolean update(String id,String lastName,
 			String firstName,String address,String mailAddress) throws Exception {
 		
 		Connection con = getConnection();
@@ -120,10 +125,13 @@ public class UserDAO extends DAO {
 		ps.setString(3, address);
 		ps.setString(4, mailAddress);
 		ps.setString(5, id);
+		int line =  ps.executeUpdate();
 		
-		int line = ps.executeUpdate();
+		if (line < 0)return false;
 		
-		return line;		
+		ps.close();
+		con.close();
+		return true;		
 	}
 	
 	/**
@@ -133,7 +141,7 @@ public class UserDAO extends DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int delete(String id) throws Exception {
+	public boolean delete(String id) throws Exception {
 		
 		Connection con = getConnection();
 		PreparedStatement ps;
@@ -142,6 +150,10 @@ public class UserDAO extends DAO {
 		ps.setString(1, id);
 		int line = ps.executeUpdate();
 		
-		return line;
+		if(line < 0)return false;
+		
+		ps.close();
+		con.close();
+		return true;
 	}
 }

@@ -24,10 +24,11 @@ public class CheckIdServlet extends HttpServlet {
 		
 		try {
 			UserDAO dao = new UserDAO();
-			boolean userId = dao.serchId(id);
+			boolean userId = dao.userCheck(id);
 			
 			response.setContentType("application/json; charset=UTF-8");
-			response.getWriter().write("{\"exists\":" + userId + "}");
+			response.getWriter().print("{\"exists\":" + userId + "}");
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

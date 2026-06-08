@@ -19,10 +19,10 @@ public class EditValidationAction extends Action{
 		String mailAddress = request.getParameter("mailAddress");
 		
 		String url = validation(lastName, firstName, address, mailAddress);
-		if(url.equals("-error.jsp"))return url;
+		if(url.equals("edit-error.jsp"))return url;
 		
 		User user = (User)session.getAttribute("user");
-		if(user == null) return "-error.jsp";
+		if(user == null) return "edit-error.jsp";
 		
 		user.setLastName(lastName);
 		user.setFirstName(firstName);
@@ -39,18 +39,18 @@ public class EditValidationAction extends Action{
 	//入力バリデーション
 		private String validation(String lastName, String firstName, String address,
 				String mailAddress) {
-			String url = "-error.jsp";
+			String url = "edit-error.jsp";
 
-			if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32)
+			if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$"))
 				return url;
 
-			if (firstName == null || firstName.isBlank() || firstName.isEmpty() || firstName.length() > 32)
+			if (firstName == null || firstName.isBlank() || firstName.isEmpty() || firstName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$"))
 				return url;
 
-			if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128)
+			if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128 || !address.matches("^[^<>]+$"))
 				return url;
 
-			if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || mailAddress.length() > 128)
+			if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))
 				return url;
 
 			url = "edit-validation.jsp";

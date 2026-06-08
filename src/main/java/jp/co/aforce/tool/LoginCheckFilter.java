@@ -19,31 +19,31 @@ import jakarta.servlet.http.HttpSession;
 
 @WebFilter("/")
 public class LoginCheckFilter extends HttpFilter implements Filter {
-/**
-	@see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	*/
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		HttpServletRequest request2 = (HttpServletRequest)request;
-		HttpServletResponse response2 = (HttpServletResponse)response;
-		
+	/**
+		@see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+		*/
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
+		HttpServletRequest request2 = (HttpServletRequest) request;
+		HttpServletResponse response2 = (HttpServletResponse) response;
+
 		String uri = request2.getRequestURI();
-		
-		if(uri.endsWith("login-in.jsp") || uri.endsWith("Login.action")) {
-		chain.doFilter(request, response);
-		return;
+
+		if (uri.endsWith("/login-in.jsp")|| uri.endsWith("Login.action") || uri.endsWith("Add.action") || uri.endsWith("AddValid.ation")
+				|| uri.endsWith("user-add.jsp") || uri.endsWith("useradd-error.jsp") ) {
+			chain.doFilter(request, response);
+			return;
 		}
-		
+
 		HttpSession session = request2.getSession(false);
-		
-		if(session == null || session.getAttribute("user") == null) {
-		response2.sendRedirect("login-in.jsp");
-		return;
+		if (session == null || session.getAttribute("user") == null) {
+			response2.sendRedirect(request2.getContextPath() + "/views/login-in.jsp");
+			return;
 		}
-		
+
 		chain.doFilter(request, response);
-		
-		}
-		
-		}
-		
+
+	}
+
+}

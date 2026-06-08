@@ -4,6 +4,11 @@
 	box-sizing: border-box;
 }
 
+/*Eggのデフォルトパス表示のマークを非表示にした。*/
+::-ms-reveal{
+	display: none;
+}
+
 .errorMsg {
 	display: none;
 	color: red !important;
@@ -17,7 +22,7 @@
 
 body {
 	margin: 0;
-	background-color: rgb(252, 241, 220);
+	background-color: rgb(253, 244, 230);
 }
 
 .login-main {
@@ -26,7 +31,7 @@ body {
 	/*画面中央*/
 	display: grid;
 	place-items: center;
-	min-height: 90vh;
+	min-height: 100vh;
 
 	padding-inline: 1rem;
 }
@@ -61,18 +66,18 @@ body {
 ********************/
 @media (max-width: 600px) {
 
-	/*全体のカード*/
+	全体のカード
 	.login-card {
 		width: 90vw;
 	}
 
-	/*input text*/
+	input text
 	.login-text {
 		width: 100%;
 		padding: 0.5rem;
 	}
 
-	/*タイトル*/
+	タイトル
 	.login-title {
 		margin: 0;
 		font-size: 1rem;
@@ -80,7 +85,7 @@ body {
 		text-align: left;
 	}
 
-	/*ﾗﾍﾞﾙ*/
+	ﾗﾍﾞﾙ
 	.form-label {
 		font-size: 0.7rem;
 	}
@@ -98,7 +103,7 @@ body {
 	margin-top: 1.5rem;
 
 
-	background-color: #FFB6C1;
+	background-color: rgb(253, 244, 230);
 	border-radius: 12px;
 }
 

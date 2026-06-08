@@ -10,14 +10,14 @@
 	display: none;
 }
 
-#vali-btu:disabled {
+#vail-btu:disabled{
 	background-color: aliceblue;
 	cursor: not-allowed;
 }
 
-.field {
+.filed{
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 5px;
-	width: 14rem;
+	width: 12rem;
 }

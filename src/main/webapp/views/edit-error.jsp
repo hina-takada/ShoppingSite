@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>登録エラー</title>
+<title>修正エラー画面</title>
 </head>
 <body>
 	
-	<h2>そのIDは既に登録されています。</h2>
+	<h1>修正された内容のエラー</h1>
+	
+	<p>入力された内容に間違いがあります</p>
+	
 	
 </body>
 </html>

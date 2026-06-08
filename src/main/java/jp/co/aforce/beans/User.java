@@ -13,7 +13,31 @@ public class User {
 	private String address;//住所
 	private String mailAddress;//メースアドレス
 	private String role;//権限(user/admin)
+	private String registdate;//登録日時
+	private String updateDate;//更新日時
 	
+	
+	/**
+	 * 登録日時
+	 * @return
+	 */
+	public String getRegistdate() {
+		return registdate;
+	}
+	public void setRegistdate(String registdate) {
+		this.registdate = registdate;
+	}
+	
+	/**
+	 * 更新日時
+	 * @return
+	 */
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
 	
 	/*
 	 * idのget set

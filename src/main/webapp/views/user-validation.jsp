@@ -9,6 +9,7 @@
 </head>
 <body>
 	<!-- user-validation -->
+	<h2>この内容でよろしいですか?</h2>
 	
 	会員ID:<c:out value="${user.id}"></c:out><br>
 	パスワード：<c:out value="${user.pass}"></c:out><br>
