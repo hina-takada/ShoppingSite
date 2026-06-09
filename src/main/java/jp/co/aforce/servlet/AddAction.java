@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jp.co.aforce.beans.User;
+import jp.co.aforce.beans.InsertUserBean;
 import jp.co.aforce.dao.UserDAO;
 import jp.co.aforce.tool.Action;
 
@@ -14,14 +14,14 @@ public class AddAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 
-		User user = (User)session.getAttribute("user");
+		InsertUserBean insertUser = (InsertUserBean)session.getAttribute("insertUser");
 		UserDAO dao = new UserDAO();
-		boolean line = dao.insert(user.getId(), user.getPass(), user.getLastName(), 
-				user.getFirstName(), user.getAddress(), user.getMailAddress());
+		boolean line = dao.insert(insertUser.getId(), insertUser.getPass(), insertUser.getLastName(), 
+				insertUser.getFirstName(), insertUser.getAddress(), insertUser.getMailAddress());
 		
 		if(line == false) return "registered-error.jsp";
 		
-		session.removeAttribute("user");
+		session.removeAttribute("insertUser");
 		
 		return "user-success.jsp";
 	}

@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jp.co.aforce.beans.User;
+import jp.co.aforce.beans.InsertUserBean;
 import jp.co.aforce.dao.UserDAO;
 import jp.co.aforce.tool.Action;
 
@@ -24,18 +24,18 @@ public class AddValidationAction extends Action {
 		String url = validation(id, pass, lastName, firstName, address, mailAddress);
 		if(url.equals("useradd-error.jsp")) return url;
 		
-		User user = new User();
+		InsertUserBean insertUser = new InsertUserBean();
 		//追加
-		user.setId(id);
-		user.setPass(pass);
-		user.setLastName(lastName);
-		user.setFirstName(firstName);
-		user.setAddress(address);
-		user.setMailAddress(mailAddress);
+		insertUser.setId(id);
+		insertUser.setPass(pass);
+		insertUser.setLastName(lastName);
+		insertUser.setFirstName(firstName);
+		insertUser.setAddress(address);
+		insertUser.setMailAddress(mailAddress);
 		
 		
 		//セッション
-		session.setAttribute("user", user);
+		session.setAttribute("insertUser", insertUser);
 		session.setMaxInactiveInterval(60*3);
 		
 		return url;

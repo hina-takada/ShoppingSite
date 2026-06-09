@@ -19,24 +19,27 @@
 
 			<h2 class="login-title">ログイン</h2>
 
-			<form class="login-form" action="Login.action" method="post">
+			<form class="login-form" action="Login.action" method="post"
+				autocomplete="off">
 
 
 				<div class="form-group">
 					<label class="form-label">会員ID</label>
 					<!-- 半角英数文字 -->
 					<div class="pass_box">
-						<input id="form-id" class="login-text" type="text" name="id" placeholder="ID入力">
+						<input id="form-id" class="login-text" type="text" name="id"
+							placeholder="ID入力" autocomplete="off">
 					</div>
 					<div id="errorMsgId" class="errorMsg"></div>
 				</div>
 
 				<div class="form-group">
 					<!-- 半角英数文字 -->
-					<label class="form-label">パスワード</label> 
+					<label class="form-label">パスワード</label>
 					<div class="pass_box">
-						<input id="form-pass" class="login-text" type="password" name="pass" placeholder="パスワード入力"> 
-						<i id="fa-eye" class="fa fa-eye" aria-hidden="true"></i>
+						<input id="form-pass" class="login-text" type="password"
+							name="pass" placeholder="パスワード入力" autocomplete="off"> <i
+							id="fa-eye" class="fa fa-eye" aria-hidden="true"></i>
 					</div>
 					<div id="errorMsgPass" class="errorMsg"></div>
 				</div>
@@ -44,13 +47,11 @@
 				<div class="form-action">
 					<input id="login-btu" type="submit" value="ログイン" disabled>
 				</div>
-
-
 			</form>
-		</div>
 
-		<div class="link-area">
-			<a href=<c:url value='/views/user-add.jsp'/>>新規会員登録</a>
+			<div class="link-area">
+				アカウントをお持ちでない方<a href=<c:url value='/views/user-add.jsp'/>>新規会員登録</a>
+			</div>
 		</div>
 
 	</main>

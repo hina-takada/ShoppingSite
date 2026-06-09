@@ -15,12 +15,11 @@
 	
 	<button>修正</button>
 	<button>削除</button>
-	<button>商品管理</button>
+	<button type="button" onclick="location.href = 'Product.action'">商品管理</button>
 	<button type="button" id="logout">ログアウト</button>
 	
 	<%@ include file="../tool/dialog.jsp" %>
 	
 	<script src="../js/logoutJs.js"></script>
-	<script src="../js/.js"></script>
 </body>
 </html>

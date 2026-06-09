@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import jp.co.aforce.beans.UpdateUserBeen;
 import jp.co.aforce.beans.User;
 import jp.co.aforce.tool.Action;
 
@@ -24,12 +25,14 @@ public class EditValidationAction extends Action{
 		User user = (User)session.getAttribute("user");
 		if(user == null) return "edit-error.jsp";
 		
-		user.setLastName(lastName);
-		user.setFirstName(firstName);
-		user.setAddress(address);
-		user.setMailAddress(mailAddress);
+		UpdateUserBeen upUser = new UpdateUserBeen();
 		
-		session.setAttribute("user", user);
+		upUser.setLastName(lastName);
+		upUser.setFirstName(firstName);
+		upUser.setAddress(address);
+		upUser.setMailAddress(mailAddress);
+		
+		session.setAttribute("upUser", upUser);
 		session.setMaxInactiveInterval(60*3);
 		
 		return url;

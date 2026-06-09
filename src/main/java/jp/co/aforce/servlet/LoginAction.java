@@ -52,7 +52,7 @@ public class LoginAction extends Action {
 			
 			//ログイン成功処理
 			session.setAttribute("user", users);//セッションスコープ
-			session.setMaxInactiveInterval(60*10);//仮置き
+			/*session.setMaxInactiveInterval(60*10);*///仮置き
 			SessionManager.loginUsers.put(users.getId(), session);//セッションを登録
 
 			//メニュー処理

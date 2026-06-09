@@ -1,45 +1,16 @@
 package jp.co.aforce.beans;
-
-import java.time.LocalDate;
-
 /**
- * 
- * usersデータベースのbean
+ * 情報修正用Been
  * 
  */
-public class User {
+public class InsertUserBean {
 	private String id;//会員番号
 	private String pass;//パスワード
 	private String lastName;//名前_姓
 	private String firstName;//名前_名
 	private String address;//住所
 	private String mailAddress;//メースアドレス
-	private String role;//権限(user/admin)
-	private LocalDate registdate;//登録日時
-	private LocalDate updateDate;//更新日時
 	
-	
-	/**
-	 * 登録日時
-	 * @return
-	 */
-	public LocalDate getRegistdate() {
-		return registdate;
-	}
-	public void setRegistdate(LocalDate registdate) {
-		this.registdate = registdate;
-	}
-	
-	/**
-	 * 更新日時
-	 * @return
-	 */
-	public LocalDate getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(LocalDate updateDate) {
-		this.updateDate = updateDate;
-	}
 	
 	/*
 	 * idのget set
@@ -61,8 +32,10 @@ public class User {
 		this.pass = pass;
 	}
 	
-	/*
-	 * 姓のget set
+	
+	/**
+	 * 
+	 * @return
 	 */
 	public String getLastName() {
 		return lastName;
@@ -71,8 +44,9 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	/*
-	 * 名のget set
+	/**
+	 * 
+	 * @return
 	 */
 	public String getFirstName() {
 		return firstName;
@@ -81,8 +55,9 @@ public class User {
 		this.firstName = firstName;
 	}
 	
-	/*
-	 * 住所のget set
+	/**
+	 * 
+	 * @return
 	 */
 	public String getAddress() {
 		return address;
@@ -90,9 +65,9 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	/*
-	 * メースアドレスのget set
+	/**
+	 * 
+	 * @return
 	 */
 	public String getMailAddress() {
 		return mailAddress;
@@ -101,14 +76,5 @@ public class User {
 		this.mailAddress = mailAddress;
 	}
 	
-	/**
-	 * 権限のget set
-	 * @return 権限を返す
-	 */
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
+	
 }
