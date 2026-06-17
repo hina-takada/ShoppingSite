@@ -22,7 +22,7 @@ public class AddValidationAction extends Action {
 		String mailAddress = request.getParameter("mailAddress");
 
 		String url = validation(id, pass, lastName, firstName, address, mailAddress);
-		if(url.equals("useradd-error.jsp")) return url;
+		if(url.equals("user-add-error.jsp")) return url;
 		
 		InsertUserBean insertUser = new InsertUserBean();
 		//追加
@@ -36,7 +36,6 @@ public class AddValidationAction extends Action {
 		
 		//セッション
 		session.setAttribute("insertUser", insertUser);
-		session.setMaxInactiveInterval(60*3);
 		
 		return url;
 	}
@@ -44,7 +43,7 @@ public class AddValidationAction extends Action {
 	//入力バリデーション
 	private String validation(String id, String pass, String lastName, String firstName, String address,
 			String mailAddress) throws Exception {
-		String url = "useradd-error.jsp";
+		String url = "user-add-error.jsp";
 		UserDAO dao = new UserDAO();
 		boolean exeit = dao.userCheck(id);
 	
@@ -78,7 +77,7 @@ public class AddValidationAction extends Action {
 			return url;
 		}
 
-		url = "user-validation.jsp";
+		url = "user-add-validation.jsp";
 		return url;
 	}
 

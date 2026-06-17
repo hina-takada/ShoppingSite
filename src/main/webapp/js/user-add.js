@@ -28,7 +28,7 @@ const state = {
    ルール
 ========================= */
 const rules = {
-	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9]+$/, message: "英数字のみ使用できます" },
+	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9]+$/, message: "使用できない文字が含まれています" },
 	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9@#$%&]+$/, message: "使用できない文字が含まれています" },
 	lastName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	firstName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
@@ -60,15 +60,9 @@ function validate(input) {
 
 	if (!rule) return true;
 
-	if (value.length === 0) {
+	if (value === "") {
 		state.filed[input.name] = false;
 		hideError(input, ".error-length");
-		return false;
-	}
-
-	if (value.length < rule.min || value.length > rule.max) {
-		state.filed[input.name] = false;
-		showError(input, ".error-length", `${rule.min}〜${rule.max}文字で入力してください`);
 		return false;
 	}
 
@@ -78,21 +72,15 @@ function validate(input) {
 		return false;
 	}
 
+	if (value.length < rule.min || value.length > rule.max) {
+		state.filed[input.name] = false;
+		showError(input, ".error-length", `${rule.min}〜${rule.max}文字で入力してください`);
+		return false;
+	}
+
 	state.filed[input.name] = true;
 	hideError(input, ".error-length");
 	return true;
-}
-
-/* =========================
-   IDフォーマット
-========================= */
-function isValidIdFormat(value) {
-	const r = rules.id;
-	return (
-		value.length >= r.min &&
-		value.length <= r.max &&
-		r.regex.test(value)
-	);
 }
 
 /* =========================
@@ -152,18 +140,28 @@ idInput.addEventListener("input", () => {
 	timer = setTimeout(async () => {
 
 		/* ① formatチェック */
-		const formatOK = isValidIdFormat(value);
-		state.id.format = formatOK;
-		state.filed.id = formatOK;
+		state.id.format = true;
+		state.filed.id = true;
+		const r = rules.id;
 
-		if (!formatOK) {
+
+		if (!r.regex.test(value)) {
+			state.id.format = false;
 			state.id.server = false;
-			showError(idInput, ".error-id", "4〜10文字の英数字で入力してください");
+			showError(idInput, ".error-length", "英数字のみ入力できます");
 			updateButton();
 			return;
 		}
 
-		hideError(idInput, ".error-id");
+		if (value.length < r.min || value.length > r.max) {
+			state.id.format = false;
+			state.id.server = false;
+			showError(idInput, ".error-length", "4〜10文字の英数字で入力してください");
+			updateButton();
+			return;
+		}
+
+		hideError(idInput, ".error-length");
 
 		/* ② サーバーチェック */
 		const data = await checkIdServer(value);

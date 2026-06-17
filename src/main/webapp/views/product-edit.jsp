@@ -1,48 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>会員情報編集</title>
-<link rel="stylesheet" href="../css/user-edit.css">
+<title>商品情報編集</title>
+<link rel="stylesheet" href="../css/product-edit.css">
 </head>
 <body>
-	<h1>会員情報編集画面</h1>
+	<h1>商品情報編集画面</h1>
 
-	<form action="EditValidation.action" method="post">
-		<div class="filed">
-			名前(姓):<input type="text" name="lastName"
-				value="${empty upUser ? user.lastName : upUser.lastName}">
-			<span class="error is-hidden"></span>
+	<form action="ProductEditValidation.action" method="post">
+		<div class="field">
+			商品名：<input type="text" name="name" value="${upProduct.name}" data-validate="text"> 
+			<span class="error error-length is-hidden"></span>
+			<span class="error error-regex is-hidden"></span>
 		</div>
 		
-		
-		<div class="filed">
-			名前(名):<input type="text" name="firstName"
-				value="${empty upUser ? user.firstName : upUser.firstName}">
-			<span class="error is-hidden"></span>
+		<div class="checkbox">
+			<label><input type="radio" name="categoryId" value="1" data-validate="radio" ${upProduct.categoryId == 1 ? 'checked' : ''}>イヌ科</label>
+			<label><input type="radio" name="categoryId" value="2" data-validate="radio" ${upProduct.categoryId == 2 ? 'checked' : ''}>ネコ科</label>
+			<label><input type="radio" name="categoryId" value="3" data-validate="radio" ${upProduct.categoryId == 3 ? 'checked' : ''}>クマ科</label>
+			<span class="error error-chack is-hidden"></span>
 		</div>
 		
-		
-		<div class="filed">
-			住所:<input type="text" name="address"
-				 value="${empty upUser ? user.address : upUser.address}">
-			<span class="error is-hidden"></span>
+		<div class="field">
+			価格:<input type="number" name="price" value="${upProduct.price}"
+				 min="0" data-validate="number">
+			<span class="error error-num is-hidden"></span>
+		</div>
+		<div class="field">
+			在庫数：<input type="number" name="count" value="${upProduct.count}"
+			 min="0" max="9999" data-validate="number">
+			<span class="error error-num is-hidden"></span>
 		</div>
 		
-		<div class="filed">
-			メールアドレス:<input type="text" name="mailAddress"
-				value="${empty upUser ? user.mailAddress : upUser.mailAddress}">
-			<span class="error is-hidden"></span>
+		<div class="field">
+		<p>商品説明</p>
+			<textarea name="description" rows="10" cols="70" data-validate="text"><c:out value="${upProduct.description}"></c:out></textarea>
+			<span class="error error-length is-hidden"></span>
 		</div>
-		
 		<input id="vail-btu" type="submit" value="確認" >
 	</form>
 
-	<a href="user-menu.jsp">会員メニュー画面へ戻る</a>
+	<a href="product-menu.jsp">商品管理画面へ戻る</a>
 
-	<script src="../js/user-edit.js"></script>
+	<script src="../js/product-add.js"></script>
 </body>
 </html>

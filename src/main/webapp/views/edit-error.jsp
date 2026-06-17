@@ -12,6 +12,6 @@
 	
 	<p>入力された内容に間違いがあります</p>
 	
-	
+	<a href="edit-validation.jsp"></a>
 </body>
 </html>

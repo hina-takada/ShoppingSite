@@ -3,15 +3,20 @@ package jp.co.aforce.beans;
 import java.time.LocalDateTime;
 
 public class ProductBean {
-	private int productId;
-	private String name;
-	private int price;
-	private int count;
-	private LocalDateTime registdate;
-	private LocalDateTime updateDate;
+	private int productId;//商品ID
+	private String name;//商品名
+	private int price;//価格
+	private int count;//個数
+	private int categoryId;//カテゴリーID
+	private String categoryName;//カテゴリー名
+	private String description;//説明文
+	private String fileName;//説明文
+	private LocalDateTime registdate;//登録日
+	private LocalDateTime updateDate;//更新日
 	
 	
 	/**
+	 * 商品ID
 	 * 
 	 * @return
 	 */
@@ -24,6 +29,7 @@ public class ProductBean {
 	
 	
 	/**
+	 * 商品名
 	 * 
 	 * @return
 	 */
@@ -36,6 +42,7 @@ public class ProductBean {
 	
 	
 	/**
+	 * 価格
 	 * 
 	 * @return
 	 */
@@ -48,6 +55,7 @@ public class ProductBean {
 	
 	
 	/**
+	 * 個数
 	 * 
 	 * @return
 	 */
@@ -60,6 +68,57 @@ public class ProductBean {
 	
 	
 	/**
+	 * カテゴリーID
+	 * @return
+	 */
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
+	
+	/**
+	 * カテゴリー名
+	 * 
+	 * @return
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String string) {
+		this.categoryName = string;
+	}
+	
+	
+	/**
+	 * 商品説明
+	 * 
+	 * @return
+	 */
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+
+	/**
+	 * ファイル名
+	 * 
+	 * @return
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	/**
+	 * 入力した月日
 	 * 
 	 * @return
 	 */
@@ -72,6 +131,7 @@ public class ProductBean {
 	
 	
 	/**
+	 * 更新時間
 	 * 
 	 * @return
 	 */

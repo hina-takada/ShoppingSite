@@ -112,19 +112,21 @@ public class UserDAO extends DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean update(String id,String lastName,
+	public boolean update(String id,String upId,String pass,String lastName,
 			String firstName,String address,String mailAddress) throws Exception {
 		
 		Connection con = getConnection();
 		PreparedStatement ps;
 		
 		ps = con.prepareStatement
-			("UPDATE users SET LAST_NAME = ?,FIRST_NAME = ?,ADDRESS = ?,MAIL_ADDRESS = ?  WHERE MEMBER_ID = ?");
-		ps.setString(1, lastName);
-		ps.setString(2, firstName);
-		ps.setString(3, address);
-		ps.setString(4, mailAddress);
-		ps.setString(5, id);
+			("UPDATE users SET MEMBER_ID = ?,PASSWORD = ?, LAST_NAME = ?,FIRST_NAME = ?,ADDRESS = ?,MAIL_ADDRESS = ?  WHERE MEMBER_ID = ?");
+		ps.setString(1, upId);
+		ps.setString(2, pass);
+		ps.setString(3, lastName);
+		ps.setString(4, firstName);
+		ps.setString(5, address);
+		ps.setString(6, mailAddress);
+		ps.setString(7, id);
 		int line =  ps.executeUpdate();
 		
 		if (line < 0)return false;

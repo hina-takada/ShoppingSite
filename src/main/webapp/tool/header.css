@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    z-index: 1000;
+}
+
+main {
+    padding-top: 60px;
+}

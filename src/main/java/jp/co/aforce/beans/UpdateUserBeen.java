@@ -4,10 +4,33 @@ package jp.co.aforce.beans;
  * 
  */
 public class UpdateUserBeen {
+	private String id;//会員番号
+	private String pass;//パスワード
 	private String lastName;//名前_姓
 	private String firstName;//名前_名
 	private String address;//住所
 	private String mailAddress;//メースアドレス
+	
+	
+	/*
+	 * idのget set
+	 */
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	/*
+	 * パスワードのget set
+	 */
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	
 	/**
 	 * 

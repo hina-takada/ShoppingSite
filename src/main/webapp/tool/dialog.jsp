@@ -11,7 +11,7 @@
 	
   <!-- ダイアログ用 -->
 	<dialog id="myDialog">
-		<p>本当によろしいですか？</p>
+		<p id="dialogMessage"></p>
 		<button type="button" id="okBtu">はい</button>
 		<button type="button" id="noBtu">いいえ</button>
 	</dialog>

@@ -1,19 +1,17 @@
 package jp.co.aforce.beans;
-/**
- * 情報修正用Been
- * 
- */
-public class InsertUserBean {
+
+public class InsertUserBean{
+	
 	private String id;//会員番号
-	private String pass;//パスワード
+	private String pass;
 	private String lastName;//名前_姓
 	private String firstName;//名前_名
 	private String address;//住所
 	private String mailAddress;//メースアドレス
 	
-	
-	/*
-	 * idのget set
+	/**
+	 * 
+	 * @return
 	 */
 	public String getId() {
 		return id;
@@ -22,8 +20,9 @@ public class InsertUserBean {
 		this.id = id;
 	}
 	
-	/*
-	 * パスワードのget set
+	/**
+	 * 
+	 * @return
 	 */
 	public String getPass() {
 		return pass;
@@ -43,6 +42,7 @@ public class InsertUserBean {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	
 	/**
 	 * 
@@ -65,6 +65,7 @@ public class InsertUserBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	/**
 	 * 
 	 * @return

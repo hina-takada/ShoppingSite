@@ -14,19 +14,30 @@ public class EditValidationAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		
+		String mode = request.getParameter("model");
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
 		String lastName = request.getParameter("lastName");
 		String firstName = request.getParameter("firstName");
 		String address = request.getParameter("address");
 		String mailAddress = request.getParameter("mailAddress");
 		
-		String url = validation(lastName, firstName, address, mailAddress);
-		if(url.equals("edit-error.jsp"))return url;
+		boolean isValid = validation(id,pass,lastName, firstName, address, mailAddress);
+		if(isValid == false) {
+			System.out.println("edit-errorエラー");
+			return "edit-error.jsp";
+		}
 		
 		User user = (User)session.getAttribute("user");
-		if(user == null) return "edit-error.jsp";
+		if(user == null) {
+			System.out.println("userエラー");
+			return "edit-error.jsp";
+		}
 		
 		UpdateUserBeen upUser = new UpdateUserBeen();
 		
+		upUser.setId(id);
+		upUser.setPass(pass);
 		upUser.setLastName(lastName);
 		upUser.setFirstName(firstName);
 		upUser.setAddress(address);
@@ -35,28 +46,46 @@ public class EditValidationAction extends Action{
 		session.setAttribute("upUser", upUser);
 		session.setMaxInactiveInterval(60*3);
 		
-		return url;
+		if("admin".equals(mode)) return "admin-edit-validation.jsp";
+		
+		return "edit-validation.jsp";
 	}
 	
 	
 	//入力バリデーション
-		private String validation(String lastName, String firstName, String address,
+		private boolean validation(String id, String pass, String lastName, String firstName, String address,
 				String mailAddress) {
-			String url = "edit-error.jsp";
 
-			if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$"))
-				return url;
+			if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9]+$")) {
+				System.out.println("idエラー");
+				return false;
+			}
+			
+			if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9]+$")) {
+				System.out.println("passエラー");
+				return false;
+			}
+			
+			if (lastName == null || lastName.isBlank() || lastName.isEmpty() || lastName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$")) {
+				System.out.println("lastNameエラー");
+				return false;
+			}
 
-			if (firstName == null || firstName.isBlank() || firstName.isEmpty() || firstName.length() > 32 || !lastName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$"))
-				return url;
+			if (firstName == null || firstName.isBlank() || firstName.isEmpty() || firstName.length() > 32 || !firstName.matches("^[ぁ-んァ-ヶ一-龠々A-Za-z]+$")) {
+				System.out.println("lastNameエラー");
+				return false;
+			}
 
-			if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128 || !address.matches("^[^<>]+$"))
-				return url;
+			if (address == null || address.isBlank() || address.isEmpty() || address.length() > 128 || !address.matches("^[^<>]+$")) {
+				System.out.println("addressエラー");
+				return false;
+			}
 
-			if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))
-				return url;
-
-			url = "edit-validation.jsp";
-			return url;
+			if (mailAddress == null || mailAddress.isBlank() || mailAddress.isEmpty() || mailAddress.length() > 128 || !mailAddress.matches("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+				System.out.println("mailAddressエラー");
+				return false;
+			}
+				
+			return true;
 		}
 }

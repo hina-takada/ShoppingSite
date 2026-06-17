@@ -65,7 +65,7 @@ body {
 /*******************
 *Windowが小さい場合*
 ********************/
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
 	.login-main {
 		/*画面中央*/

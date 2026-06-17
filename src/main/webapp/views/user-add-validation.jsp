@@ -11,12 +11,12 @@
 	<!-- user-validation -->
 	<h2>この内容でよろしいですか?</h2>
 	
-	会員ID:<c:out value="${insertUser.getId()}"></c:out><br>
-	パスワード：<c:out value="${insertUser.getPass()}"></c:out><br>
-	名前(姓)：<c:out value="${insertUser.getLastName()}"></c:out><br>
-	名前(名)：<c:out value="${insertUser.getFirstName()}"></c:out><br>
-	住所：<c:out value="${insertUser.getAddress()}"></c:out><br>
-	メールアドレス：<c:out value="${insertUser.getMailAddress()}"></c:out><br>
+	会員ID:<c:out value="${insertUser.id}"></c:out><br>
+	パスワード：<c:out value="${insertUser.pass}"></c:out><br>
+	名前(姓)：<c:out value="${insertUser.lastName}"></c:out><br>
+	名前(名)：<c:out value="${insertUser.firstName}"></c:out><br>
+	住所：<c:out value="${insertUser.address}"></c:out><br>
+	メールアドレス：<c:out value="${insertUser.mailAddress}"></c:out><br>
 	
 	<form action="Add.action" method="post">
 		<button type="submit">登録</button>

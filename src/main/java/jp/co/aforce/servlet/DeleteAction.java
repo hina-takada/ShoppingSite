@@ -18,16 +18,32 @@ public class DeleteAction extends Action{
 		
 		User user = (User)session.getAttribute("user");
 		String id = user.getId();
+		String role = user.getRole();
 		
-		if(user == null || id == null || id.isBlank()) {
-			return "userDelete-error";
+		if(user == null || user.getId() == null || user.getId().isBlank()) {
+			if("ADMIN".equals(role)) {
+				return "admin-delete-success.jsp";
+			}
+			return "user-delete-success.jsp";
 		}
 		
+		
 		boolean line = dao.delete(user.getId());
+		if(line == false) {
+			if("ADMIN".equals(role)) {
+				return "admin-delete-success.jsp";
+			}
+			return "user-delete-success.jsp";
+		}
 		
-		if(line == false)return "userDelete-error";
 		
-		return "userDeleteSuccess.jsp";
+		
+		session.removeAttribute("user");
+		if("ADMIN".equals(role)) {
+			return "admin-delete-success.jsp";
+		}
+		
+		return "user-delete-success.jsp";
 	}
 
 }

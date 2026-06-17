@@ -19,28 +19,6 @@ public class User {
 	private LocalDate updateDate;//更新日時
 	
 	
-	/**
-	 * 登録日時
-	 * @return
-	 */
-	public LocalDate getRegistdate() {
-		return registdate;
-	}
-	public void setRegistdate(LocalDate registdate) {
-		this.registdate = registdate;
-	}
-	
-	/**
-	 * 更新日時
-	 * @return
-	 */
-	public LocalDate getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(LocalDate updateDate) {
-		this.updateDate = updateDate;
-	}
-	
 	/*
 	 * idのget set
 	 */
@@ -102,6 +80,28 @@ public class User {
 	}
 	
 	/**
+	 * 登録日時
+	 * @return
+	 */
+	public LocalDate getRegistdate() {
+		return registdate;
+	}
+	public void setRegistdate(LocalDate registdate) {
+		this.registdate = registdate;
+	}
+	
+	/**
+	 * 更新日時
+	 * @return
+	 */
+	public LocalDate getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(LocalDate updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	/**
 	 * 権限のget set
 	 * @return 権限を返す
 	 */
@@ -111,4 +111,5 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
 }

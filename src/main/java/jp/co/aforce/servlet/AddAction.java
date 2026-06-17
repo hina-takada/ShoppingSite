@@ -19,7 +19,7 @@ public class AddAction extends Action{
 		boolean line = dao.insert(insertUser.getId(), insertUser.getPass(), insertUser.getLastName(), 
 				insertUser.getFirstName(), insertUser.getAddress(), insertUser.getMailAddress());
 		
-		if(line == false) return "registered-error.jsp";
+		if(line == false) return "session-error.jsp";
 		
 		session.removeAttribute("insertUser");
 		

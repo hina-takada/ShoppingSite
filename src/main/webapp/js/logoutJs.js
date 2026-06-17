@@ -7,6 +7,7 @@ window.addEventListener("load", function() {
 	const noBtu = document.getElementById("noBtu");
 
 	logout.addEventListener("click", function() {
+		message.textContent = "ログアウトしますか？";
 		dialog.showModal();
 
 	});

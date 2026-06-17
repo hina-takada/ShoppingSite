@@ -30,18 +30,24 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 
 		String uri = request2.getRequestURI();
 
-		if (uri.endsWith("/login-in.jsp")|| uri.endsWith("Login.action") || uri.endsWith("Add.action") || uri.endsWith("AddValid.ation")
+		//セッションが切れたら
+		
+		/*if (uri.endsWith("/login-in.jsp")|| uri.endsWith("Login.action") || uri.endsWith("Add.action") || uri.endsWith("AddValid.ation")
 				|| uri.endsWith("user-add.jsp") || uri.endsWith("useradd-error.jsp") ) {
 			chain.doFilter(request, response);
 			return;
-		}
+		}*/
 
 		HttpSession session = request2.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		
 		if (session == null || session.getAttribute("user") == null) {
 			response2.sendRedirect(request2.getContextPath() + "/views/login-in.jsp");
 			return;
 		}
-
+		
 		chain.doFilter(request, response);
 
 	}

@@ -12,13 +12,9 @@
 	
 	<p>IDもしくはパスワードが違います</p>
 	
-	<a href="login-in.jsp">
-	<button>ログイン画面へ戻る</button>
-	</a>
-	
-	<!-- <button type="button" onclick="location.href='user-add.jsp'">
+	<button type="button" onclick="location.href='login-in.jsp'">
 	  戻る
-	 </button> -->
+	 </button>
 	
 </body>
 </html>
