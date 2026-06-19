@@ -1,6 +1,6 @@
 package jp.co.aforce.beans;
 
-public class InsertProductBean {
+public class InsertProductBean implements java.io.Serializable{
 	private String name;
 	private int categoryId;
 	private String categoryName;

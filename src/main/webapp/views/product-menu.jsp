@@ -12,7 +12,7 @@
 	<h1>商品管理</h1>
 	<c:forEach var="product" items="${products}">
 		
-		<img alt="商品画像" src="${pageContext.request.contextPath}/upload/${product.fileName}" width="200">
+		<img alt="商品画像" src="${pageContext.request.contextPath}/image?name=${product.fileName}" width="200">
 		<c:out value="${product.productId}"></c:out>
 		<c:out value="${product.name}"></c:out>
 		<c:out value="${product.categoryName}"></c:out>

@@ -10,8 +10,6 @@ public class HomeAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
-		
 		return null;
 	}
 

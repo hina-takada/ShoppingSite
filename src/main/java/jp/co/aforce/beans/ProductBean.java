@@ -2,7 +2,7 @@ package jp.co.aforce.beans;
 
 import java.time.LocalDateTime;
 
-public class ProductBean {
+public class ProductBean implements java.io.Serializable{
 	private int productId;//商品ID
 	private String name;//商品名
 	private int price;//価格
@@ -10,7 +10,7 @@ public class ProductBean {
 	private int categoryId;//カテゴリーID
 	private String categoryName;//カテゴリー名
 	private String description;//説明文
-	private String fileName;//説明文
+	private String fileName;//
 	private LocalDateTime registdate;//登録日
 	private LocalDateTime updateDate;//更新日
 	

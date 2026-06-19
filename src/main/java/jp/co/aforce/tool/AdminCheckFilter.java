@@ -13,16 +13,26 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import jp.co.aforce.beans.User;
+
 /**
 	* Servlet Filter implementation class LoginCheck
 	* http://localhost:8080/ShoppingSite/views/HomeProduct.action
 	*/
 
 @WebFilter(urlPatterns = {
-	"/views/user-menu.jsp",
-	"/views/purchase-in.jsp"
+	"/views/admin-menu.jsp",
+	"/views/Product.action",
+	"/views/ProductAdd.action",
+	"/views/ProductEdit.action",
+	"/views/ProductDelete.action",
+	"/views/product-menu.jsp",
+	"/views/product-add.jsp",
+	"/views/product-edit.jsp",
+	"/views/product-delete.jsp"
+	
 })
-public class LoginCheckFilter extends HttpFilter {
+public class AdminCheckFilter extends HttpFilter {
     
 /**
 	* @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
@@ -35,24 +45,21 @@ public class LoginCheckFilter extends HttpFilter {
 		HttpSession session = req.getSession(false);
 		
 		if(session == null) {
-			res.sendRedirect(req.getContextPath() + "/views/HomeProduct.action");
+			res.sendRedirect(req.getContextPath() + "HomeProduct.action");
 			return;
 		}
-		
+				
 		if(session.getAttribute("user") == null) {
-			//試し
-				if("true".equals(req.getParameter("fromCart"))) {
-					session.setAttribute("returnUrl", "cart.jsp");
-				}else {
-					session.setAttribute("returnUrl", "HomeProduct.action");
-				}
-			//試し
-			
-			res.sendRedirect(req.getContextPath() + "/views/not-logged-in.jsp");
+			res.sendRedirect(req.getContextPath() + "/views/lnot-logged-in.jsp");
 			return;
 		}
 		
+		User user = (User) session.getAttribute("user");
 		
+		if(!"ADMIN".equals(user.getRole())) {
+			res.sendRedirect("user-menu.jsp");
+			return;
+		}
 		
 		chain.doFilter(request, response);
 		}

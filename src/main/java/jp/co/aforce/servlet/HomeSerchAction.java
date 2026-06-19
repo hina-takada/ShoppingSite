@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jp.co.aforce.beans.HomeBean;
-import jp.co.aforce.dao.HomeDAO;
+import jp.co.aforce.beans.ProductBean;
+import jp.co.aforce.dao.ProductDAO;
 import jp.co.aforce.tool.Action;
 
 public class HomeSerchAction extends Action{
@@ -18,8 +18,8 @@ public class HomeSerchAction extends Action{
 		HttpSession session = request.getSession();
 		String keyword = request.getParameter("keyword");
 		
-		HomeDAO dao = new HomeDAO();
-		List<HomeBean> products = (List<HomeBean>) dao.serch(keyword);
+		ProductDAO dao = new ProductDAO();
+		List<ProductBean> products = (List<ProductBean>) dao.serch(keyword);
 		
 		if(products == null) return "home-product-error.jsp";
 		

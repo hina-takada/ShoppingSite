@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+/*Eggのデフォルトパス表示のマークを非表示にした。*/
+::-ms-reveal {
+	display: none;
+}
+
+.errorMsg {
+	display: none;
+	color: red !important;
+	font-size: 10px;
+}
+
+.form{
+	display: grid;
+	margin-right: 10px;
+}

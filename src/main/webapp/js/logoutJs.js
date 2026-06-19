@@ -2,6 +2,7 @@
 //画面を含む場合は,loadを使用
 window.addEventListener("load", function() {
 	const dialog = document.getElementById("myDialog");
+	const message = document.getElementById("dialogMessage");
 	const logout = document.getElementById("logout");
 	const okBtu = document.getElementById("okBtu");
 	const noBtu = document.getElementById("noBtu");

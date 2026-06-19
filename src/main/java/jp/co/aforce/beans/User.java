@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * usersデータベースのbean
  * 
  */
-public class User {
+public class User implements java.io.Serializable{
 	private String id;//会員番号
 	private String pass;//パスワード
 	private String lastName;//名前_姓

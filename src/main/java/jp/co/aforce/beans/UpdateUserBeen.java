@@ -3,7 +3,7 @@ package jp.co.aforce.beans;
  * 情報修正用Been
  * 
  */
-public class UpdateUserBeen {
+public class UpdateUserBeen implements java.io.Serializable{
 	private String id;//会員番号
 	private String pass;//パスワード
 	private String lastName;//名前_姓

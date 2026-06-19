@@ -8,9 +8,7 @@
 <title>管理者情報登録ホーム画面</title>
 </head>
 <body>
-	<header>
-		<a href="home.jsp">NIKUKYKU</a>
-	</header>
+	<jsp:include page="/tool/header.jsp"/>
 
 	<h3>
 		<c:out value="ようこそ${user.getLastName()}さん!"></c:out>

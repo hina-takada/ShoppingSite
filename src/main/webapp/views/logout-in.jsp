@@ -12,7 +12,7 @@
 	<h2>ログアウト画面</h2>
 	
 	<p>ログアウトしました</p>
-	<a href="login-in.jsp"><button>ログイン画面に戻る</button></a>
+	<a href="HomeProduct.action"><button>ホーム画面に戻る</button></a>
 	
 	<script src="../js/logoutJs.js"></script>
 </body>

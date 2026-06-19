@@ -3,7 +3,7 @@ package jp.co.aforce.beans;
  * 情報修正用Been
  * 
  */
-public class UpdateProductBeen {
+public class UpdateProductBeen implements java.io.Serializable{
 	private int productId;
 	private String name;//商品名
 	private int price;//価格
@@ -11,6 +11,8 @@ public class UpdateProductBeen {
 	private String description;//説明文
 	private int categoryId;//カテゴリーID
 	private String categoryName;//カテゴリー名
+	private String fileName;//ファイル名
+	
 	
 	/**
 	 * 
@@ -89,6 +91,18 @@ public class UpdateProductBeen {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	/**
+	 * 画像ファイル
+	 * @return
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
 	
 
 }

@@ -13,22 +13,13 @@
 	<main>
 		<h1>検索結果</h1>
 		<!-- 検索してなかったら表示する -->
-		<c:if test="${products == null }">
-			<c:out value="">検索された商品はありません</c:out>
+		<c:if test="${empty products }">
+			<p>検索された商品はありません</p>
 		</c:if>
-
-		<c:forEach var="product" items="${products}">
-
-			<img alt="それぞれの画像" src="/ShoppingSite/img/${product.productId}.jpg"
-				width="200">
-
-			<c:out value="${product.name}"></c:out>
-			<c:out value="${product.categoryName}"></c:out>
-			<c:out value="${product.price}"></c:out>
-			<c:out value="${product.count}"></c:out>
-			<c:out value="${product.description}"></c:out>
-			<br>
-		</c:forEach>
+		
+		<c:if test="${not empty products }">
+			<jsp:include page="/views/home.jsp" />
+		</c:if>
 	</main>
 
 

@@ -16,13 +16,8 @@ public class ProductAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
-		
-		//仮置き認証
-		if(session == null || !"ADMIN".equals(user.getRole())) {
-			return "product-error.jsp";
-		}
 		
 		ProductDAO dao = new ProductDAO();
 		List<ProductBean> products = dao.serch();

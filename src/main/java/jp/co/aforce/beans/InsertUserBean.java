@@ -1,6 +1,6 @@
 package jp.co.aforce.beans;
 
-public class InsertUserBean{
+public class InsertUserBean implements java.io.Serializable{
 	
 	private String id;//会員番号
 	private String pass;

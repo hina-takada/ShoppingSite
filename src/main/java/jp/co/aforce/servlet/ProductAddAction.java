@@ -1,6 +1,7 @@
 package jp.co.aforce.servlet;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.Part;
 
 import jp.co.aforce.dao.ProductDAO;
 import jp.co.aforce.tool.Action;
+import jp.co.aforce.tool.Const;
 
 @MultipartConfig
 public class ProductAddAction extends Action {
@@ -32,27 +34,40 @@ public class ProductAddAction extends Action {
 		//name属性がpictのファイルをPartオブジェクトとして取得
 		Part part = request.getPart("img");
 		//ファイル名を取得
-		String filename = part.getSubmittedFileName();
-		//アップロードするフォルダ
-		String path = request.getServletContext().getRealPath("/upload");
-		/*		//実際にファイルが保存されるパス確認
-		
-				System.out.println(path);*/
-		//書き込み
-		part.write(path + File.separator + filename);
-		
-		File file = new File(path + File.separator + filename);
+		String filename = Paths.get(part.getSubmittedFileName())
+				.getFileName()
+				.toString();
 
-		System.out.println(file.getAbsolutePath());
-		System.out.println(file.exists());
+		//アップロードするフォルダ
+		/**
+		 * ★AWSの際は、ここを変更する。
+		 * "/home/ec2-user/upload"
+		 * 
+		 * EC2:
+		 * コマンド（sshでログイン）
+		mkdir /home/ec2-user/upload
+		chmod 777 /home/ec2-user/upload
 		
+		 */
+		String path = Const.UPLOAD_PATH;
+
+		File dir = new File(path);
+
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+
+		//書き込み
+		File file = new File(dir, filename);
+		part.write(file.getAbsolutePath());
+
 		//数字に変換
 		int price = Integer.parseInt(priceS);
 		int count = Integer.parseInt(countS);
 		int categoryId = Integer.parseInt(categoryIdS);
 
 		ProductDAO dao = new ProductDAO();
-		boolean line = dao.insert(name, price, count, categoryId, description,filename);
+		boolean line = dao.insert(name, price, count, categoryId, description, filename);
 
 		if (line == false)
 			return "product-error.jsp";
@@ -60,7 +75,6 @@ public class ProductAddAction extends Action {
 		return "product-add-success.jsp";
 	}
 
-	
 	//入力バリデーション
 	private String validation(String name, String category, String price, String count, String description)
 			throws Exception {
@@ -115,6 +129,7 @@ public class ProductAddAction extends Action {
 			System.out.println("count範囲エラー");
 			return url;
 		}
+		
 
 		/**
 		 * 説明文
@@ -125,7 +140,7 @@ public class ProductAddAction extends Action {
 			return url;
 		}
 
-		url = "admin-edit-success.jap";
+		url = "admin-add-success.jsp";
 		return url;
 
 	}
