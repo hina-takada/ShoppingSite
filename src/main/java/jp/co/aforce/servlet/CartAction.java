@@ -26,6 +26,7 @@ public class CartAction extends Action{
 		
 		/*税抜合計*/
 		int total = 0;
+		int tax = 0;
 		for(Item item : items) {
 			int subtotal = item.getProduct().getPrice() 
 					* item.getCount();
@@ -36,7 +37,7 @@ public class CartAction extends Action{
 		}
 		
 		/*税込み*/
-		int tax = (int)(total * 0.1);
+		tax = (int)(total * 0.1);
 		int totalTax = total + tax;
 		
 		/*送料含み*/

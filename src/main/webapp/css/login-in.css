@@ -1,8 +1,22 @@
 @charset "UTF-8";
 
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+}
+
 * {
 	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
+
 
 /*Eggのデフォルトパス表示のマークを非表示にした。*/
 ::-ms-reveal {
@@ -12,20 +26,25 @@
 .errorMsg {
 	display: none;
 	color: red !important;
-	font-size: 10px;
+	font-size: 12px;
+	/*フォント*/
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
 }
 
 /*ログインボタン制御*/
 #login-btu:disabled {
-	background-color: rgb(235, 235, 235);
-	color: rgb(192, 192, 192);
+	background-color: var(--button-color);
+	color: var(--button-font);
 	box-shadow: none;
 	cursor: not-allowed;
 }
 
 body {
 	margin: 0;
-	background-color: rgb(253, 244, 230);
+	background-color: var(--main-color);
 }
 
 .login-main {
@@ -40,26 +59,83 @@ body {
 /*全体のカード*/
 .login-card {
 	width: 100%;
-	max-width: 500px;
+	max-width: 600px;
 }
 
 /*input text*/
 .login-text {
 	width: 100%;
-	padding: 0.8rem;
+
+	padding: 1rem;
+
+	font-size: 1rem;
+
+	border: 1px solid rgb(192, 192, 192, 0.5);
+	border-radius: 4px;
+	outline: none;
+
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
+}
+
+/*placeholder*/
+.login-text::placeholder {
+	font-size: 0.8rem;
+}
+
+/*クリックした時の枠線*/
+.login-text:focus {
+	border-color: rgb(255, 111, 183);
 }
 
 /*タイトル*/
 .login-title {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+
 	margin: 0;
-	font-size: 1rem;
-	color: rgb(50, 26, 7);
-	text-align: left;
+	font-size: 1.5rem;
+	font-family: 'Nunito';
+	color: var(--font-main-color);
+}
+
+/* 足跡まとめ */
+.paw-group {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.login-title .paw-group {
+	position: static;
+	color: var(--sub-color);
+	font-size: 0.7rem;
+}
+
+.pow1 {
+	transform: rotate(80deg);
+}
+
+.pow2 {
+	transform: translateY(-8px) rotate(100deg);
+}
+
+.left-pow2 {
+	transform: translateY(8px) rotate(100deg);
+}
+
+.pow3 {
+	transform: rotate(80deg);
 }
 
 /*ﾗﾍﾞﾙ*/
 .form-label {
-	font-size: 0.7rem;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: var(--font-main-color);
 }
 
 /*******************
@@ -69,7 +145,7 @@ body {
 
 	.login-main {
 		/*画面中央*/
-		margin: 0 20px;
+		margin: 0 10px;
 	}
 
 	.login-card {
@@ -87,9 +163,8 @@ body {
 	display: grid;
 	gap: 1rem;
 	margin-top: 1.5rem;
-	border-bottom: 1px solid rgb(50, 26, 7, 0.4);
-
-	background-color: rgb(253, 244, 230);
+	border-bottom: 1px solid rgb(50, 26, 7, 0.5);
+	background-color: var(--main-color);
 }
 
 /*入力フォーム/1行単位*/
@@ -99,7 +174,6 @@ body {
 
 }
 
-
 .pass_box {
 	position: relative;
 	display: inline-block;
@@ -107,17 +181,17 @@ body {
 
 .pass_box input {
 	padding-right: 40px;
-	font-size: 14px;
 	box-sizing: border-box;
+	color: var();
 }
 
-.fa {
+.pass_box .fas {
 	position: absolute;
 	right: 12px;
 	top: 50%;
 	transform: translateY(-50%);
 	cursor: pointer;
-	color: rgb(50, 26, 7, 0.6);
+	color: rgb(50, 26, 7, 0.5);
 }
 
 /*ボタン*/
@@ -133,27 +207,33 @@ body {
 	padding: 0.8rem 5rem;
 	border: none;
 
-	box-shadow: 0 6px 0 #d98b99;
-	background-color: #FFB6C1;
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
 	border-radius: 999px;
 	transition: 0.2s ease;
-	
-	}
 
-	/*ログイン：アニメーション*/
-	.form-action input:active{
-		transform: scale(0.92) translateY(5px);
-		box-shadow: 0 2px 0 #d98b99;
-	}
+}
 
-	/*新規登録*/
-	.link-area {
-		font-size: 0.8rem;
-		text-align: center;
-		padding: 20px;
-		color: rgb(50, 26, 7);
-	}
+/*ログイン：アニメーション*/
+.form-action input:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}
 
-	.link-area a {
-		color: rgb(83, 176, 253);
-	}
+/*新規登録*/
+.link-area {
+	font-size: 0.8rem;
+	text-align: center;
+	padding: 20px;
+	color: var(--font-main-color);
+
+	/*フォント*/
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
+}
+
+.link-area a {
+	color: var(--link-color);
+}

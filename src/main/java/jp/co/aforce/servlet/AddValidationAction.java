@@ -48,12 +48,12 @@ public class AddValidationAction extends Action {
 		boolean exeit = dao.userCheck(id);
 	
 
-		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || exeit == true || !id.matches("^[a-zA-Z0-9]+$")) {
+		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || exeit == true || !id.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 			System.out.println("IDエラー");
 			return url;
 		}
 
-		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9@#$%&]+$")){
+		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")){
 			System.out.println("passエラー");
 			return url;
 		}

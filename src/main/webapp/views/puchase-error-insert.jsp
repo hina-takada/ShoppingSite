@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>削除完了画面</title>
+<title>購入エラー画面</title>
 </head>
 <body>
-	
-	<h1>削除完了</h1>
-	
-	<a href="home.jsp">ホーム画面へ戻る</a>
+	<h1>購入時にエラーが発生しました。</h1>
 </body>
 </html>

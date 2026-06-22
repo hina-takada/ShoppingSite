@@ -19,7 +19,7 @@ function valideteInput(input, errorMsg, min, max,regex) {
 	}
 	
 	if(!regex.test(value)){
-			errorMsg.textContent = "半角英数または、先頭に記号は使用しないでください";
+			errorMsg.textContent = "全角英数または、先頭に記号は使用しないでください";
 			errorMsg.style.display = "block";
 			return false;	
 		}
@@ -36,7 +36,7 @@ function valideteInput(input, errorMsg, min, max,regex) {
 }
 
 function updateLoginBtton() {
-	const isIdValid = valideteInput(formId, errorMsgId, 4, 10, /^[a-zA-Z0-9]+$/);
+	const isIdValid = valideteInput(formId, errorMsgId, 4, 10, /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/);
 	const isPassValid = valideteInput(formPass, errorMsgPass, 8, 32,/^[a-zA-Z0-9@#$%&]+$/);
 
 	loginBtu.disabled = !(isIdValid && isPassValid);

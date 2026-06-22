@@ -22,15 +22,15 @@ public class EditValidationAction extends Action{
 		String address = request.getParameter("address");
 		String mailAddress = request.getParameter("mailAddress");
 		
-		boolean isValid = validation(id,pass,lastName, firstName, address, mailAddress);
-		if(isValid == false) {
-			System.out.println("edit-errorエラー");
-			return "edit-error.jsp";
-		}
-		
 		User user = (User)session.getAttribute("user");
 		if(user == null) {
 			System.out.println("userエラー");
+			return "edit-error.jsp";
+		}
+		
+		boolean isValid = validation(user.getId(),id,pass,lastName, firstName, address, mailAddress);
+		if(isValid == false) {
+			System.out.println("edit-errorエラー");
 			return "edit-error.jsp";
 		}
 		
@@ -53,15 +53,15 @@ public class EditValidationAction extends Action{
 	
 	
 	//入力バリデーション
-		private boolean validation(String id, String pass, String lastName, String firstName, String address,
+		private boolean validation(String uid,String id, String pass, String lastName, String firstName, String address,
 				String mailAddress) {
 
-			if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9]+$")) {
+			if (id == null || id.isBlank() ||!uid.equals(id) || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 				System.out.println("idエラー");
 				return false;
 			}
 			
-			if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9]+$")) {
+			if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 				System.out.println("passエラー");
 				return false;
 			}

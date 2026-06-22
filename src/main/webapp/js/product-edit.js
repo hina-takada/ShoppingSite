@@ -15,6 +15,7 @@ const fileField = document.querySelector(
 
 const submitBtn = document.getElementById("vail-btu");
 
+console.log(document.querySelector("textarea").value);
 
 /* =========================
    ルール

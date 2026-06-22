@@ -14,7 +14,7 @@
 
 	<form action="ProductEdit.action" method="post" enctype="multipart/form-data">
 		<div class="field">
-				<input type="text" name="productId" value="${upProduct.productId}"> 
+				<input type="hidden" name="productId" value="${upProduct.productId}"> 
 			商品名：<input type="text" name="name" value="${upProduct.name}"
 				data-validate="text"> 
 				<span class="error error-length is-hidden"></span> 
@@ -42,8 +42,7 @@
 
 		<div class="field">
 			<p>商品説明</p>
-			<textarea name="description" rows="10" cols="70" data-validate="text">
-			<c:out value="${upProduct.description}"></c:out></textarea>
+			<textarea name="description" rows="10" cols="70" data-validate="text"><c:out value="${upProduct.description}"></c:out></textarea>
 			<span class="error error-length is-hidden"></span>
 		</div>
 		

@@ -16,6 +16,7 @@
 		<div class="filed">
 			会員ID:<input type="text" name="id" autocomplete="off"
 				value="${empty upUser ? user.id : upUser.id}">
+		    <input type="hidden" id="current-id" value="${user.id}">
 			<span class="error error-length is-hidden"></span>
 			<span class="error error-id is-hidden"></span>
 		</div>

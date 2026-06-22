@@ -29,7 +29,7 @@ public class FrontContoroller extends HttpServlet {
 								getDeclaredConstructor().newInstance(); 
 			String url = action.execute(request, response);
 			
-			if(url.contains("-error") || url.contains("-validation") ) {
+			if(url.contains("-error") || url.contains("-validation") || url.contains("serch-result") || url.contains("ProductAction") || url.contains("home.jsp")) {
 				request.getRequestDispatcher(url).forward(request, response);
 				return;
 			}

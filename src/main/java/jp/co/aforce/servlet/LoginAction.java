@@ -18,12 +18,12 @@ public class LoginAction extends Action {
 		String pass = request.getParameter("pass");
 
 		//入力バリデーション
-		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9].*$")) {
+		if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 			return "login-error.jsp";
 		}
 
 		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32
-				|| !pass.matches("^[a-zA-Z0-9].*$")) {
+				|| !pass.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 			return "login-error.jsp";
 		}
 
@@ -50,7 +50,7 @@ public class LoginAction extends Action {
 
 		//ログイン成功処理
 		session.setAttribute("user", users);//セッションスコープ
-		session.setMaxInactiveInterval(60*10);//仮置き時間
+		session.setMaxInactiveInterval(60*60*24);//仮置き時間
 
 		session.setAttribute("userId", users.getId());//セッション破棄時にMapから削除するキー
 		/*SessionManager.loginUsers.put(users.getId(), session);*///キー：ユーザー名、値：セッション

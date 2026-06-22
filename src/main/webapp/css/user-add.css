@@ -1,9 +1,33 @@
 @charset "UTF-8";
 
-.error{
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+.error {
 	color: red;
 	font-size: 12px;
 	margin-top: 2px;
+	/*フォント*/
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
 }
 
 .is-hidden {
@@ -11,13 +35,134 @@
 }
 
 #vali-btu:disabled {
-	background-color: aliceblue;
+	background-color: var(--button-color);
+	color: var(--button-font);
+	box-shadow: none;
 	cursor: not-allowed;
 }
 
+body {
+	margin: 0;
+	background-color: var(--main-color);
+}
+
+.add-main {
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.add-title {
+	font-size: 2rem;
+	color: var(--font-main-color);
+}
+
+.add-form {
+	width: 100%;
+	max-width: 500px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+/*一つの入力フォーム*/
 .field {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 5px;
-	width: 14rem;
+	/*	margin-bottom: 1rem;*/
+}
+
+.form-label {
+	margin: 0 0 5px;
+	font-size: 0.85rem;
+	color: var(--font-main-color);
+}
+
+.form-label span {
+	color: red;
+}
+
+.field input {
+	width: 100%;
+	padding: 0.9rem;
+
+	border: 1px solid rgb(192, 192, 192, 0.5);
+	border-radius: 4px;
+
+	outline: none;
+
+	/*フォント*/
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
+}
+
+.field input:focus {
+	border-color: rgb(255, 111, 183);
+}
+
+/*ボタン*/
+.form-action {
+	display: grid;
+	place-items: center;
+	margin-top: 0.8rem;
+	padding-bottom: 1.5rem;
+}
+
+.form-action input {
+	padding: 0.8rem 12rem;
+	border: none;
+
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+
+}
+
+#vali-btu {
+	font-size: 1rem;
+}
+
+/*アニメーション*/
+.form-action input:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}
+
+/*ログインボタン制御*/
+#vali-btu:disabled {
+	background-color: var(--button-color);
+	color: var(--button-font);
+	box-shadow: none;
+	cursor: not-allowed;
+}
+
+/*戻る*/
+.link-area {
+	margin-bottom: 4rem;
+
+	box-shadow: 0 6px 0 var(--back-shadow);
+	background-color: var(--back-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+}
+
+.link-area a {
+	display: block;
+	
+	padding: 0.8rem 10rem;
+	
+	text-decoration: none;
+	color: var(--font-main-color);
+}
+
+.link-area:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--back-shadow);
 }

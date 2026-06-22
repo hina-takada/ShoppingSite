@@ -15,6 +15,7 @@
 		width="200">
 
 	<c:out value="${product.name}"></c:out>
+	<c:out value="${product.categoryName}"></c:out>
 	<c:out value="${product.price}"></c:out>円
 	<c:out value="${product.description}"></c:out>
 	

@@ -2,21 +2,138 @@ package jp.co.aforce.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.aforce.beans.Item;
+import jp.co.aforce.beans.ProductBean;
+import jp.co.aforce.beans.PurchaseProductBean;
+import jp.co.aforce.beans.User;
 
-public class PurchaseDAO extends DAO{
-	public boolean insert(List<Item> cart,String name,String address) throws Exception {
+public class PurchaseDAO extends DAO {
+	public boolean insert(List<Item> cart, int tax, int totalTax, int shippingFee, int grandTotal, String userid,
+			String lastName, String firstName, String address, String orderId) throws Exception {
 		Connection con = getConnection();
 		con.setAutoCommit(false);
-		
-		for(Item item : cart) {
-			PreparedStatement ps = con.prepareStatement
-					("");
+
+		for (Item item : cart) {
+			PreparedStatement ps = con.prepareStatement(
+					"insert into purchase(product_id,order_id,product_name,product_price,product_subtotal,product_count,product_tax,product_totaltax,shipping_fee,product_grand_total,"
+							+ "user_id,user_last_name,user_first_name,user_address)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ProductBean p = item.getProduct();
+			ps.setInt(1, p.getProductId());
+			ps.setString(2, orderId);
+			ps.setString(3, p.getName());
+			ps.setInt(4, p.getPrice());
+			ps.setInt(5, item.getSubTotal());
+			ps.setInt(6, item.getCount());
+			ps.setInt(7, tax);
+			ps.setInt(8, totalTax);
+			ps.setInt(9, shippingFee);
+			ps.setInt(10, grandTotal);
+			ps.setString(11, userid);
+			ps.setString(12, lastName);
+			ps.setString(13, firstName);
+			ps.setString(14, address);
+
+			int line = ps.executeUpdate();
+			ps.close();
+
+			if (line != 1) {
+				con.rollback();
+				con.setAutoCommit(true);
+				con.close();
+				return false;
+			}
 		}
-		
-		
-		return false;
+
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+		return true;
+
 	}
+
+	public List<PurchaseProductBean> serch(String orderId) throws Exception {
+		Connection con = getConnection();
+		List<PurchaseProductBean> list = new ArrayList<>();
+
+		PreparedStatement ps = con.prepareStatement(
+				"select pu.product_id,order_id,product_name,product_price,product_subtotal,product_count,product_tax,product_totaltax,shipping_fee,product_grand_total,"
+						+ "user_id,user_last_name,user_first_name,user_address,fileName from purchase pu join products p on pu.product_id = p.product_id where order_id = ?");
+		ps.setString(1, orderId);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			PurchaseProductBean pur = new PurchaseProductBean();
+			ProductBean p = pur.getProduct();
+			User u = pur.getUser();
+			p.setProductId(rs.getInt("pu.product_id"));
+			pur.setOrderId(rs.getString("order_id"));
+			p.setName(rs.getString("product_name"));
+			p.setPrice(rs.getInt("product_price"));
+			pur.setSubTotal(rs.getInt("product_subtotal"));
+			p.setCount(rs.getInt("product_count"));
+			pur.setTax(rs.getInt("product_tax"));
+			pur.setTotalTax(rs.getInt("product_totaltax"));
+			pur.setShippingFee(rs.getInt("shipping_fee"));
+			pur.setGrandTotal(rs.getInt("product_grand_total"));
+			u.setLastName(rs.getString("user_last_name"));
+			u.setFirstName(rs.getString("user_first_name"));
+			u.setAddress(rs.getString("user_address"));
+			p.setFileName(rs.getString("fileName"));
+			list.add(pur);
+		}
+
+		return list;
+	}
+	
+	
+	
+	
+	/**
+	 * 履歴用のserch
+	 * 
+	 */
+	public List<PurchaseProductBean> historySerch(String string) throws Exception {
+		Connection con = getConnection();
+		List<PurchaseProductBean> list = new ArrayList<>();
+
+		PreparedStatement ps = con.prepareStatement(
+				"select pu.REGIST_DATE,product_name,product_price,product_subtotal,product_count,product_tax,product_totaltax,shipping_fee,product_grand_total,user_last_name,user_first_name,user_address,fileName"
+				+ " from purchase pu join products p on pu.product_id = p.product_id where user_id = ? order by REGIST_DATE desc");
+		ps.setString(1, string);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			PurchaseProductBean pur = new PurchaseProductBean();
+			ProductBean p = pur.getProduct();
+			User u = pur.getUser();
+			p.setName(rs.getString("product_name"));
+			p.setPrice(rs.getInt("product_price"));
+			pur.setSubTotal(rs.getInt("product_subtotal"));
+			p.setCount(rs.getInt("product_count"));
+			pur.setTax(rs.getInt("product_tax"));
+			pur.setTotalTax(rs.getInt("product_totaltax"));
+			pur.setShippingFee(rs.getInt("shipping_fee"));
+			pur.setGrandTotal(rs.getInt("product_grand_total"));
+			u.setLastName(rs.getString("user_last_name"));
+			u.setFirstName(rs.getString("user_first_name"));
+			u.setAddress(rs.getString("user_address"));
+			p.setFileName(rs.getString("fileName"));
+			pur.setRegistdate(rs.getObject("REGIST_DATE",LocalDateTime.class));
+			list.add(pur);
+		}
+
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	background-color: rgb(253, 244, 230);
+}
+
+.error-main{
+	min-height: 70vh;
+	
+	display: grid;
+	place-items: center;
+}
+
+.error-card{
+	width: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5rem;
+}
+
+.error-title{
+	font-size: 2rem;
+	color: rgb(50,26,7);
+}
+
+.error-card img{
+	width:400px;
+	margin: 20px 0;
+	border-radius: 60px;
+}
+
+error-text{
+	color:  rgb(50,26,7);
+	text-align: left;
+}
+
+/*リンク*/
+.back-link{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/*アイコン作業*/
+.back-link i{
+	color: rgb(255, 255, 255);
+	font-size:12px;
+}
+
+.icon{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(50,26,7);
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/*アイコン作業*/
+
+.back-link a{
+	text-decoration: none;
+	color: rgb(77, 173, 253);
+}
+
+
+

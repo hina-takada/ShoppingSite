@@ -21,10 +21,15 @@ public class CheckIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = (String) request.getParameter("id");
+		String currentId = (String)request.getParameter("currentId");
 		
 		try {
 			UserDAO dao = new UserDAO();
 			boolean userId = dao.userCheck(id);
+			
+			if(id.equals(currentId)) {
+				userId = false;
+			}
 			
 			response.setContentType("application/json; charset=UTF-8");
 			response.getWriter().print("{\"exists\":" + userId + "}");

@@ -5,6 +5,7 @@
 const inputs = document.querySelectorAll("input[name]");
 const idInput = document.querySelector("input[name='id']");
 const valiBtu = document.getElementById("vali-btu");
+const currentId = document.getElementById("current-id")?.value;
 
 /* =========================
    状態
@@ -28,8 +29,8 @@ const state = {
    ルール
 ========================= */
 const rules = {
-	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9]+$/, message: "使用できない文字が含まれています" },
-	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9@#$%&]+$/, message: "使用できない文字が含まれています" },
+	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
+	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
 	lastName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	firstName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	address: { min: 1, max: 128, regex: /^[^<>]+$/, message: "使用できない文字が含まれています" },
@@ -91,7 +92,8 @@ let lastRequestId = 0;
 function checkIdServer(value) {
 	const requestId = ++lastRequestId;
 
-	return fetch("../checkid?id=" + encodeURIComponent(value))
+	return fetch("../checkid?id=" + encodeURIComponent(value)
+		+ "&currentId=" + encodeURIComponent(currentId))
 		.then(res => {
 			if (!res.ok) throw new Error("server error");
 			return res.json();
@@ -166,7 +168,11 @@ idInput.addEventListener("input", () => {
 		/* ② サーバーチェック */
 		const data = await checkIdServer(value);
 
-		if (!data) return;
+		if (!data) {
+			state.id.server = false;
+			updateButton();
+			return;
+		}
 
 		state.id.server = !data.exists;
 		state.filed.id = state.id.server;
@@ -202,11 +208,16 @@ window.addEventListener("load", async () => {
 		return;
 	}
 
-	const formatOK = isValidIdFormat(value);
-	state.id.format = formatOK;
-	state.filed.id = formatOK;
+	const r = rules.id;
 
-	if (!formatOK) {
+	const formatOk = r.regex.test(value) &&
+		value.length >= r.min &&
+		value.length <= r.max;
+
+	state.id.format = formatOk;
+	state.filed.id = formatOk;
+
+	if (!formatOk) {
 		updateButton();
 		return;
 	}

@@ -17,12 +17,13 @@ public class HomeProductAction extends Action{
 		
 		HttpSession session = request.getSession();
 		
+		String form = request.getParameter("form");
+		
 		ProductDAO dao = new ProductDAO();
 		List<ProductBean> products = dao.serch();
 		
 		if(products == null) return "home-error.jsp";
 		
-		session.removeAttribute("keyword");
 		session.setAttribute("products", products);
 		
 		return "home.jsp";

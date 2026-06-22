@@ -35,11 +35,12 @@
 
 
 		<div class="form">
-			<form action="Purchases.action">
-				お名前_姓<input id="buy-lastname" type="text" name="name" value="${user.getLastName()}"> 
-				<span id="error-msg-lastname" class="errorMsg"></span> 
+			<form action="Purchases.action" method="post">
+				お名前_姓<input id="buy-lastname" type="text" name="last-name" value="${user.getLastName()}"> 
+				<span id="error-msg-lastname" 
+				class="errorMsg"></span> 
 				
-				お名前_名<input id="buy-firstname" type="text" name="name" value="${user.getFirstName()}"> 
+				お名前_名<input id="buy-firstname" type="text" name="first-name" value="${user.getFirstName()}"> 
 				<span id="error-msg-firstname" class="errorMsg"></span> 
 				
 				ご住所<input id="buy-address" type="text" name="address" value="${user.getAddress()}"> 

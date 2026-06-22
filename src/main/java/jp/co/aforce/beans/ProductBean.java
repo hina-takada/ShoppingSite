@@ -3,6 +3,9 @@ package jp.co.aforce.beans;
 import java.time.LocalDateTime;
 
 public class ProductBean implements java.io.Serializable{
+	/**
+	 * 商品の表示
+	 */
 	private int productId;//商品ID
 	private String name;//商品名
 	private int price;//価格
@@ -10,7 +13,12 @@ public class ProductBean implements java.io.Serializable{
 	private int categoryId;//カテゴリーID
 	private String categoryName;//カテゴリー名
 	private String description;//説明文
-	private String fileName;//
+	private String fileName;//画像のパス
+	/**
+	 * 商品購入時の変数
+	 */
+	/*private int orderId;//注文番号(注文した場合につかう)
+	*/	
 	private LocalDateTime registdate;//登録日
 	private LocalDateTime updateDate;//更新日
 	
@@ -116,6 +124,17 @@ public class ProductBean implements java.io.Serializable{
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	/**
+	 * 注文番号
+	 * @return
+	 */
+	/*public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int  orderId) {
+		this.orderId = orderId;
+	}*/
 	
 	/**
 	 * 入力した月日

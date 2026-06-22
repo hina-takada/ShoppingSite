@@ -19,8 +19,9 @@ import jakarta.servlet.http.HttpSession;
 	*/
 
 @WebFilter(urlPatterns = {
-	"/views/user-menu.jsp",
-	"/views/purchase-in.jsp"
+	"/views/Menu.action",
+	"/views/purchase-in.jsp",
+	"/views/OrderHistory.action"
 })
 public class LoginCheckFilter extends HttpFilter {
     

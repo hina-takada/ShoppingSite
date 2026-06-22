@@ -11,8 +11,10 @@
 
 	<h1>商品管理</h1>
 	<c:forEach var="product" items="${products}">
-		
-		<img alt="商品画像" src="${pageContext.request.contextPath}/image?name=${product.fileName}" width="200">
+
+		<img alt="商品画像"
+			src="${pageContext.request.contextPath}/image?name=${product.fileName}"
+			width="200">
 		<c:out value="${product.productId}"></c:out>
 		<c:out value="${product.name}"></c:out>
 		<c:out value="${product.categoryName}"></c:out>
@@ -33,6 +35,29 @@
 		</form>
 		<br>
 	</c:forEach>
+
+
+	<c:if test="${currentPage > 1}">
+		<a href="Product.action?page=${currentPage - 1}">＜</a>
+	</c:if>
+
+	<c:forEach var="i" begin="1" end="${totalPages}">
+		<c:choose>
+
+			<c:when test="${i == currentPage}">
+				<strong>${i}</strong>
+			</c:when>
+
+			<c:otherwise>
+				<a href="Product.action?page=${i}">${i}</a>
+			</c:otherwise>
+
+		</c:choose>
+	</c:forEach>
+
+	<c:if test="${currentPage < totalPages}">
+		<a href="Product.action?page=${currentPage + 1}">＞</a>
+	</c:if>
 
 
 	<br>

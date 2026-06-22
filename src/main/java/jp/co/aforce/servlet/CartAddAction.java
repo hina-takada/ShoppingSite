@@ -54,6 +54,8 @@ public class CartAddAction extends Action {
 		cart.add(i);
 		
 	
+		session.removeAttribute("keyword");
+		
 		return "Cart.action";
 	}
 

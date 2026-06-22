@@ -28,8 +28,8 @@ const state = {
    ルール
 ========================= */
 const rules = {
-	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9]+$/, message: "使用できない文字が含まれています" },
-	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9@#$%&]+$/, message: "使用できない文字が含まれています" },
+	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
+	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
 	lastName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	firstName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	address: { min: 1, max: 128, regex: /^[^<>]+$/, message: "使用できない文字が含まれています" },
@@ -144,11 +144,19 @@ idInput.addEventListener("input", () => {
 		state.filed.id = true;
 		const r = rules.id;
 
+		if (value.length <= 0) {
+			state.id.format = false;
+			state.id.server = false;
+			hideError(idInput, ".error-length");
+			updateButton();
+			return;
+		}
+
 
 		if (!r.regex.test(value)) {
 			state.id.format = false;
 			state.id.server = false;
-			showError(idInput, ".error-length", "英数字のみ入力できます");
+			showError(idInput, ".error-length", r.message);
 			updateButton();
 			return;
 		}
@@ -202,18 +210,26 @@ window.addEventListener("load", async () => {
 		return;
 	}
 
-	const formatOK = isValidIdFormat(value);
-	state.id.format = formatOK;
-	state.filed.id = formatOK;
+	const r = rules.id;
 
-	if (!formatOK) {
+	const formatOk = r.regex.test(value) &&
+		value.length >= r.min &&
+		value.length <= r.max;
+
+	state.id.format = formatOk;
+	state.filed.id = formatOk;
+
+	if (!formatOk) {
 		updateButton();
 		return;
 	}
 
 	const data = await checkIdServer(value);
 
-	if (!data) return;
+	if (!data) {
+		updateButton();
+		return;
+	}
 
 	state.id.server = !data.exists;
 	state.filed.id = state.id.server;

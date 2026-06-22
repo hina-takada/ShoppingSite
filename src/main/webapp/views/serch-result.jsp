@@ -8,20 +8,35 @@
 <title>検索結果画面</title>
 </head>
 <body>
+	
 	<jsp:include page="/tool/header.jsp" />
-
-	<main>
+	
 		<h1>検索結果</h1>
+		
 		<!-- 検索してなかったら表示する -->
 		<c:if test="${empty products }">
 			<p>検索された商品はありません</p>
 		</c:if>
 		
 		<c:if test="${not empty products }">
-			<jsp:include page="/views/home.jsp" />
-		</c:if>
+			<main>
+		<c:forEach var="product" items="${products}">
+		<a href="ProductDetail.action?id=${product.productId}">
+		
+		<img alt="商品画像" src="${pageContext.request.contextPath}/image?name=${product.fileName}" width="200">
+		<c:out value="${product.name}"></c:out>
+		<c:out value="${product.price}"></c:out>円
+		<c:out value="${product.description}"></c:out>
+		
+		</a>
+	<br>
+	</c:forEach>
+	
 	</main>
+	<footer> </footer>
+	
+	</c:if>
 
-
+<script src="../js/home.js"></script>
 </body>
 </html>

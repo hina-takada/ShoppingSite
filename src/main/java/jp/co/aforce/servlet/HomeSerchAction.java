@@ -23,7 +23,7 @@ public class HomeSerchAction extends Action{
 		
 		if(products == null) return "home-product-error.jsp";
 		
-		session.setAttribute("keyword", keyword);
+		request.setAttribute("keyword", keyword);
 		session.setAttribute("products", products);
 		
 		return "serch-result.jsp";
