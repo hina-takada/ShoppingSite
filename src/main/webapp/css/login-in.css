@@ -70,7 +70,7 @@ body {
 
 	font-size: 1rem;
 
-	border: 1px solid rgb(192, 192, 192, 0.5);
+	border: 1px solid rgb(192, 192, 192);
 	border-radius: 4px;
 	outline: none;
 
@@ -82,7 +82,7 @@ body {
 
 /*placeholder*/
 .login-text::placeholder {
-	font-size: 0.8rem;
+	color: rgb(192, 192, 192,0.8);
 }
 
 /*クリックした時の枠線*/
@@ -92,7 +92,8 @@ body {
 
 /*タイトル*/
 .login-title {
-	display: inline-flex;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 	gap: 10px;
 
@@ -133,6 +134,8 @@ body {
 
 /*ﾗﾍﾞﾙ*/
 .form-label {
+	margin-bottom: 0.4rem;
+	
 	font-size: 0.8rem;
 	font-weight: bold;
 	color: var(--font-main-color);
@@ -182,7 +185,6 @@ body {
 .pass_box input {
 	padding-right: 40px;
 	box-sizing: border-box;
-	color: var();
 }
 
 .pass_box .fas {
@@ -236,4 +238,5 @@ body {
 
 .link-area a {
 	color: var(--link-color);
+	margin-left: 2px;
 }

@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	background-color: var(--main-color);
+}
+
+/*main全体*/
+.main {
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: var(--font-main-color);
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/*ロゴ*/
+.logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	margin-bottom: 40px;
+}
+
+.logo img {
+	width: 180px;
+	border-radius: 99px;
+}
+
+/*タイトル*/
+.title {
+	margin: 0;
+	font-size: 2rem;
+}
+
+/*文字等の中*/
+.card {
+	width: 500px;
+	background: rgb(255, 255, 255);
+	border-radius: 40px;
+	padding: 40px;
+	text-align: center;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card p{
+	font-size: 1.3rem;
+	color: var(--font-main-color);
+	margin-bottom: 30px;
+}
+
+.fas{
+	font-size: 15px;
+	color: var(--sub-color);
+	transform: rotate(20deg);
+}
+
+.links-area{
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-top: 50px;
+}
+
+.links-area a{
+	display: block;
+	
+	width: 220px;
+	padding: 0.8rem 0;
+	
+	text-align: center;
+	text-decoration: none;
+	
+	color: var(--font-main-color);
+	
+	border-radius: 99px;
+}
+
+.links-area a:first-child{
+	background-color: var(--pinksub-color);
+	box-shadow: 0 6px 0 var(--sub-color);
+	transition: 0.2s ease;
+}
+
+/* ホーム */
+.links-area a:last-child{
+	background-color: var(--back-color);
+	box-shadow: 0 6px 0 var(--back-shadow);
+	transition: 0.2s ease;
+}
+
+.links-area a:active{
+	transform: scale(0.92) translateY(5px);
+}
+
+
+
+
+
+

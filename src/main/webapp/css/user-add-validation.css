@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+
+body {
+	margin: 0;
+	background-color: var(--main-color);
+}
+
+.confirm-main {
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/*タイトル*/
+.add-title {
+	/*display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;*/
+
+	font-size: 2rem;
+	color: var(--font-main-color);
+	margin-bottom: 40px;
+}
+
+/*内容*/
+.confirm-box {
+	width: 600px;
+	margin-bottom: 50px;
+}
+
+
+
+/*一つの入力フォーム*/
+.confirm-row {
+	display: flex;
+	border-bottom: 1px solid var(--sub-color);
+	padding: 18px 0;
+	font-size: 1.1rem;
+}
+
+.form-label {
+	width: 180px;
+	color: var(--font-main-color);
+	font-weight: bold;
+}
+
+.confirm-value {
+	flex: 1;
+	color: var(--font-main-color);
+}
+
+/*パスワード*/
+.pass-mask {
+	font-size: 0.8rem;
+	letter-spacing: 2px;
+}
+
+/*ボタン*/
+.form-action {
+	display: grid;
+	place-items: center;
+	margin-top: 1.4rem;
+	padding-bottom: 1.5rem;
+}
+
+.form-action button,
+.register-btn,
+.link-area a {
+	width: 350px;
+	padding: 0.8rem 0;
+	border: none;
+	border-radius: 999px;
+	text-align: center;
+	display: block;
+	transition: 0.2s ease;
+	font-size: 1rem;
+	/*cursor: ;*/
+}
+
+
+/* 登録ボタン */
+.form-action button,
+.register-btn {
+	border: none;
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
+	font-size: 1rem;
+}
+
+
+/*アニメーション*/
+.form-action button:active,
+.register-btn:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}
+
+/*戻る*/
+.link-area {
+	margin-top: 1.2rem;
+	display: flex;
+	justify-content: center;
+	transition: 0.2s ease;
+}
+
+.link-area a {
+	box-shadow: 0 6px 0 var(--back-shadow);
+	background-color: var(--back-color);
+	border-radius: 999px;
+	text-decoration: none;
+	color: var(--font-main-color);
+	font-size: 1.1em;
+}
+
+.link-area:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--back-shadow);
+}

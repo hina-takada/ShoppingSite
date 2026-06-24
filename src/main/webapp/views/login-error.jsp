@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="エラー画面"></c:set>
 <c:set var="cssFile" value="/css/error.css"></c:set>
 <%@ include file="../tool/js-header.jsp"%>
+
 <div class="error-main">
 
 <h2 class="error-title">ログインエラー</h2>

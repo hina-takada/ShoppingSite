@@ -56,7 +56,8 @@
 		</form>
 
 		<div class="link-area">
-			アカウントをお持ちでない方<a href=<c:url value='/views/user-add.jsp'/>>新規会員登録</a>
+			アカウントをお持ちでない方
+			<a href=<c:url value='/views/user-add.jsp'/>>新規会員登録</a>
 		</div>
 	</div>
 

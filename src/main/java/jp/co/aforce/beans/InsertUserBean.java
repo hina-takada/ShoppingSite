@@ -4,6 +4,7 @@ public class InsertUserBean implements java.io.Serializable{
 	
 	private String id;//会員番号
 	private String pass;
+	private String passConfirm;
 	private String lastName;//名前_姓
 	private String firstName;//名前_名
 	private String address;//住所
@@ -31,6 +32,16 @@ public class InsertUserBean implements java.io.Serializable{
 		this.pass = pass;
 	}
 	
+	/**
+	 * 確認用
+	 * @return
+	 */
+	public String getPassConfirm() {
+		return passConfirm;
+	}
+	public void setPassConfirm(String passConfirm) {
+		this.passConfirm = passConfirm;
+	}
 	
 	/**
 	 * 

@@ -21,7 +21,7 @@ public class ProductDAO extends DAO {
 		Connection con = getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name,p.name,price,count,description,fileName FROM products p join categories c "
+				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
 						+ "on p.category_id = c.category_id ORDER BY product_id");
 		ResultSet rs = ps.executeQuery();
 
@@ -29,8 +29,8 @@ public class ProductDAO extends DAO {
 			ProductBean p = new ProductBean();
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("category_id"));
-			p.setCategoryName(rs.getString("c.name"));
-			p.setName(rs.getString("p.name"));
+			p.setCategoryName(rs.getString("category_name"));
+			p.setName(rs.getString("product_name"));
 			p.setPrice(rs.getInt("price"));
 			p.setCount(rs.getInt("count"));
 			p.setDescription(rs.getString("description"));
@@ -38,6 +38,7 @@ public class ProductDAO extends DAO {
 			list.add(p);
 		}
 
+		rs.close();
 		ps.close();
 		con.close();
 		return list;
@@ -55,7 +56,7 @@ public class ProductDAO extends DAO {
 		Connection con = getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name,p.name,price,count,description,fileName FROM products p join categories c "
+				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
 						+ "on p.category_id = c.category_id where p.name like ? ORDER BY product_id");
 		ps.setString(1, "%" + keyword + "%");
 		ResultSet rs = ps.executeQuery();
@@ -64,8 +65,8 @@ public class ProductDAO extends DAO {
 			ProductBean p = new ProductBean();
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setCategoryName(rs.getString("c.name"));
-			p.setName(rs.getString("p.name"));
+			p.setCategoryName(rs.getString("category_name"));
+			p.setName(rs.getString("product_name"));
 			p.setPrice(rs.getInt("price"));
 			p.setCount(rs.getInt("count"));
 			p.setDescription(rs.getString("description"));
@@ -73,6 +74,7 @@ public class ProductDAO extends DAO {
 			list.add(p);
 		}
 
+		rs.close();
 		ps.close();
 		con.close();
 		return list;
@@ -90,7 +92,7 @@ public class ProductDAO extends DAO {
 		Connection con = getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name,p.name,price,count,description,fileName FROM products p join categories c "
+				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
 						+ "on p.category_id = c.category_id WHERE product_id = ?");
 		ps.setInt(1, productId);
 		ResultSet rs = ps.executeQuery();
@@ -99,14 +101,15 @@ public class ProductDAO extends DAO {
 			p = new ProductBean();
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setName(rs.getString("p.name"));
-			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("product_name"));
+			p.setCategoryName(rs.getString("category_name"));
 			p.setPrice(rs.getInt("price"));
 			p.setCount(rs.getInt("count"));
 			p.setDescription(rs.getString("description"));
 			p.setFileName(rs.getString("fileName"));
 		}
 
+		rs.close();
 		ps.close();
 		con.close();
 		return p;
@@ -219,6 +222,7 @@ public class ProductDAO extends DAO {
 			categoryName = rs.getString("name");
 		}
 
+		rs.close();
 		ps.close();
 		con.close();
 		return categoryName;
@@ -270,7 +274,7 @@ public class ProductDAO extends DAO {
 		Connection con = getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name,p.name,price,count,description,fileName FROM products p join categories c "
+				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
 						+ "on p.category_id = c.category_id WHERE product_id = ?");
 		ps.setInt(1, productId);
 		ResultSet rs = ps.executeQuery();
@@ -279,14 +283,15 @@ public class ProductDAO extends DAO {
 			p = new UpdateProductBeen();
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setName(rs.getString("p.name"));
-			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("product_name"));
+			p.setCategoryName(rs.getString("category_name"));
 			p.setPrice(rs.getInt("price"));
 			p.setCount(rs.getInt("count"));
 			p.setDescription(rs.getString("description"));
 			p.setFileName(rs.getString("fileName"));
 		}
 
+		rs.close();
 		ps.close();
 		con.close();
 		return p;

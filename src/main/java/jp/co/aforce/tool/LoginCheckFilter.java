@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {
 	"/views/Menu.action",
+	"/views/user-menu.jsp",	
 	"/views/purchase-in.jsp",
 	"/views/OrderHistory.action"
 })

@@ -16,18 +16,20 @@ public class AddValidationAction extends Action {
 		
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
+		String passConfirm = request.getParameter("passConfirm");
 		String lastName = request.getParameter("lastName");
 		String firstName = request.getParameter("firstName");
 		String address = request.getParameter("address");
 		String mailAddress = request.getParameter("mailAddress");
 
-		String url = validation(id, pass, lastName, firstName, address, mailAddress);
+		String url = validation(id, pass,passConfirm,lastName, firstName, address, mailAddress);
 		if(url.equals("user-add-error.jsp")) return url;
 		
 		InsertUserBean insertUser = new InsertUserBean();
 		//追加
 		insertUser.setId(id);
 		insertUser.setPass(pass);
+		insertUser.setPassConfirm(passConfirm);
 		insertUser.setLastName(lastName);
 		insertUser.setFirstName(firstName);
 		insertUser.setAddress(address);
@@ -41,7 +43,7 @@ public class AddValidationAction extends Action {
 	}
 
 	//入力バリデーション
-	private String validation(String id, String pass, String lastName, String firstName, String address,
+	private String validation(String id, String pass,String passConfirm, String lastName, String firstName, String address,
 			String mailAddress) throws Exception {
 		String url = "user-add-error.jsp";
 		UserDAO dao = new UserDAO();
@@ -54,6 +56,11 @@ public class AddValidationAction extends Action {
 		}
 
 		if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")){
+			System.out.println("passエラー");
+			return url;
+		}
+		
+		if (passConfirm == null || !passConfirm.equals(pass) || passConfirm.isBlank() || passConfirm.length() < 8 || passConfirm.length() > 32 || !passConfirm.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")){
 			System.out.println("passエラー");
 			return url;
 		}

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>未ログイン画面</title>
-</head>
-<body>
-	<jsp:include page="/tool/header.jsp" />
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%-- JSヘッダー --%>
+<c:set var="pageTitle" value="未ログイン画面"></c:set>
+<c:set var="cssFile" value="/css/not-logged.css"></c:set>
+<%@ include file="../tool/js-header.jsp"%>
+	
+<jsp:include page="/tool/header.jsp" />
 	
 	<h1>ログイン・新規登録</h1>
 	

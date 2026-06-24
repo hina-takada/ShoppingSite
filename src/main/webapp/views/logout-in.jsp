@@ -6,21 +6,21 @@
 <c:set var="cssFile" value="/css/logout.css"></c:set>
 <%@ include file="../tool/js-header.jsp"%>
 <%--  --%>
-<main class="logout-main">
+<main class="main">
 
 
-	<div class="logout-header">
-		<div class="logout-logo">
+	<div class="header">
+		<div class="logo">
 			<img alt="ロゴ" src="../img/logo.png">
 		</div>
 
-		<h2 class="logout-title">ログアウト</h2>
+		<h2 class="title">ログアウト</h2>
 	</div>
 
-	<section class="logout-card">
+	<section class="card">
 
 		<div class="card-left">
-			<div class="logout-img">
+			<div class="card-img">
 				<img alt="肉球を押し付けるイヌ" src="../img/inu_nikukyu4.jpg">
 			</div>
 
@@ -29,18 +29,18 @@
 		</div>
 
 		<div class="card-rigth">
-			<p class="logout-msg">ログアウトしました</p>
+			<p class="card-msg">ログアウトしました</p>
 
-			<div class="logout-links">
+			<div class="links">
 			
-			<div class="logout-link-box">
+			<div class="link-box">
 			<span class="icon"> <i class="fas fa-arrow-right"></i></span>
-				<a class="logout-link" href="HomeProduct.action">ホーム画面へ</a> 
+				<a class="link" href="HomeProduct.action">ホーム画面へ</a> 
 			</div>
 			
-			<div class="logout-link-box">
+			<div class="link-box">
 			<span class="icon"> <i class="fas fa-arrow-right"></i></span>
-				<a class="logout-link" href="login-in.jsp">ログイン画面へ</a>
+				<a class="link" href="login-in.jsp">ログイン画面へ</a>
 			</div>
 			
 			</div>

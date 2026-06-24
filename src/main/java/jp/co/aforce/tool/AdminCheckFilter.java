@@ -50,7 +50,7 @@ public class AdminCheckFilter extends HttpFilter {
 		}
 				
 		if(session.getAttribute("user") == null) {
-			res.sendRedirect(req.getContextPath() + "/views/lnot-logged-in.jsp");
+			res.sendRedirect(req.getContextPath() + "/views/not-logged-in.jsp");
 			return;
 		}
 		
