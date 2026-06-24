@@ -1,0 +1,153 @@
+@charset "UTF-8";
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	background-color: var(--main-color);
+}
+
+/*main全体*/
+.logout-main {
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: var(--font-main-color);
+}
+
+.logout-card {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+/*ロゴ*/
+.logout-logo img {
+	width: 150px;
+	border-radius: 99px;
+}
+
+/*タイトル*/
+.logout-title {
+	margin: 0;
+	font-size: 2rem;
+}
+
+/*文字等の中*/
+.logout-card {
+	display: flex;
+	text-align: center;
+	gap: 150px;
+}
+
+/*左側*/
+.card-left {
+	text-align: center;
+}
+
+.logout-img img {
+	width: 350px;
+	border-radius: 60px;
+}
+
+.left-msg {
+	text-align: center
+}
+
+
+/*右側*/
+.card-rigth {
+	text-align: center;
+}
+
+.logout-msg {
+	font-size: 1.5rem;
+	margin-bottom: 30px;
+}
+
+/*移動先*/
+.logout-links {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.logout-link-box {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/*アイコン作業*/
+.icon i {
+	color: rgb(255, 255, 255);
+	font-size: 12px;
+
+	line-height: 0;
+	display: block;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+
+	border-radius: 50%;
+	background-color: var(--font-main-color);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	line-height: 0;
+}
+
+/*リンク*/
+.logout-link {
+	text-decoration: none;
+	color: var(--link-color);
+
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+}
+
+.logout-link::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+
+	width: 100%;
+	height: 1px;
+
+	background-color: var(--link-color);
+	border-radius: 99px;
+
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.5s ease;
+}
+
+.logout-link:hover::after {
+	transform: scaleX(1);
+}

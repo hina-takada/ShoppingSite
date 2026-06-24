@@ -58,24 +58,23 @@ public class UserDAO extends DAO {
 	 */
 	public boolean insert(String id,String pass,String lastName,
 			String firstName,String address,String mailAddress) throws Exception {
-		Connection con = getConnection();
-		PreparedStatement ps;
-		
-		ps = con.prepareStatement
-			("INSERT INTO users (MEMBER_ID,PASSWORD,LAST_NAME,FIRST_NAME,ADDRESS,MAIL_ADDRESS) VALUES (?,?,?,?,?,?)");
-		ps.setString(1, id);
-		ps.setString(2, pass);
-		ps.setString(3, lastName);
-		ps.setString(4, firstName);
-		ps.setString(5, address);
-		ps.setString(6, mailAddress);
-		int line = ps.executeUpdate();
-		
-		if(line < 0) return false;
-		
-		ps.close();
-		con.close();
-		return true;		
+		String sql = "INSERT INTO users (MEMBER_ID,PASSWORD,LAST_NAME,FIRST_NAME,ADDRESS,MAIL_ADDRESS) VALUES (?,?,?,?,?,?)";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
+			
+			ps.setString(1, id);
+			ps.setString(2, pass);
+			ps.setString(3, lastName);
+			ps.setString(4, firstName);
+			ps.setString(5, address);
+			ps.setString(6, mailAddress);
+			int line = ps.executeUpdate();
+			
+			if(line < 0) {
+				return false;
+			}
+			return true;	
+		}
 	}
 	/**
 	 * 同じIDとPASSの組み合わせがあるかどうか
@@ -84,20 +83,19 @@ public class UserDAO extends DAO {
 	 * @throws Exception
 	 */
 	public boolean userCheck(String id) throws Exception {
-		User u = null; 
-		Connection con = getConnection();
-		PreparedStatement ps;
 		
-		ps = con.prepareStatement
-				("SELECT MEMBER_ID FROM users WHERE MEMBER_ID = ?");
-		ps.setString(1, id);
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next()) return true;
-		
-		ps.close();
-		con.close();
-		return false;
+		String sql = "SELECT MEMBER_ID FROM users WHERE MEMBER_ID = ?";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();) {
+			
+			ps.setString(1, id);
+			
+			if(rs.next()) {
+				return true;
+			}
+			return false;
+		}
 	}
 	
 	/**
@@ -114,26 +112,26 @@ public class UserDAO extends DAO {
 	 */
 	public boolean update(String id,String upId,String pass,String lastName,
 			String firstName,String address,String mailAddress) throws Exception {
-		
-		Connection con = getConnection();
-		PreparedStatement ps;
-		
-		ps = con.prepareStatement
-			("UPDATE users SET MEMBER_ID = ?,PASSWORD = ?, LAST_NAME = ?,FIRST_NAME = ?,ADDRESS = ?,MAIL_ADDRESS = ?  WHERE MEMBER_ID = ?");
-		ps.setString(1, upId);
-		ps.setString(2, pass);
-		ps.setString(3, lastName);
-		ps.setString(4, firstName);
-		ps.setString(5, address);
-		ps.setString(6, mailAddress);
-		ps.setString(7, id);
-		int line =  ps.executeUpdate();
-		
-		if (line < 0)return false;
-		
-		ps.close();
-		con.close();
-		return true;		
+		String sql = "UPDATE users SET MEMBER_ID = ?,PASSWORD = ?, LAST_NAME = ?,FIRST_NAME = ?,ADDRESS = ?,MAIL_ADDRESS = ?  WHERE MEMBER_ID = ?";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
+			
+			ps.setString(1, upId);
+			ps.setString(2, pass);
+			ps.setString(3, lastName);
+			ps.setString(4, firstName);
+			ps.setString(5, address);
+			ps.setString(6, mailAddress);
+			ps.setString(7, id);
+			int line =  ps.executeUpdate();
+			
+			if (line < 0) {
+				return false;
+			}
+			
+			return true;
+		}
+
 	}
 	
 	/**
@@ -144,18 +142,18 @@ public class UserDAO extends DAO {
 	 * @throws Exception
 	 */
 	public boolean delete(String id) throws Exception {
-		
-		Connection con = getConnection();
-		PreparedStatement ps;
-		
-		ps = con.prepareStatement("DELETE FROM users WHERE MEMBER_ID = ?");
-		ps.setString(1, id);
-		int line = ps.executeUpdate();
-		
-		if(line < 0)return false;
-		
-		ps.close();
-		con.close();
-		return true;
+		String sql = "DELETE FROM users WHERE MEMBER_ID = ?";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setString(1, id);
+			int line = ps.executeUpdate();
+			
+			if(line < 0) {
+				return false;
+			}
+			
+			return true;
+		}
+
 	}
 }

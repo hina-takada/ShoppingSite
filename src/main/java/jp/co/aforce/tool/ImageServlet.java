@@ -20,8 +20,10 @@ public class ImageServlet extends HttpServlet {
 			throws IOException {
 
 		String fileName = req.getParameter("name");
+		
+		if(fileName == null || fileName.isEmpty()) return;
 
-		File file = new File("C:\\upload", fileName);
+		File file = new File(Const.UPLOAD_PATH, fileName);
 
 		FileInputStream fis = new FileInputStream(file);
 
@@ -41,5 +43,6 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		fis.close();
+		os.close();
 	}
 }

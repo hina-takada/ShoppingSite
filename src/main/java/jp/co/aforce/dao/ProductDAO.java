@@ -111,30 +111,31 @@ public class ProductDAO extends DAO {
 		con.close();
 		return p;
 	}
-	
+
 	/**
 	 * 総件数を取得	
 	 */
 	public int countAll() throws Exception {
-		Connection con = getConnection();
 
-		PreparedStatement ps = con.prepareStatement
-				("SELECT count(*) FROM products");
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next())return rs.getInt(1);
-		
-		return 0;
+		String sql = "SELECT count(*) FROM products";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();) {
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		}
 	}
 
-	
 	/**
 	 * 商品一覧取得(商品管理用)
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ProductBean> serchManerger(int limit,int offset) throws Exception {
+	public List<ProductBean> serchManerger(int limit, int offset) throws Exception {
 		List<ProductBean> list = new ArrayList<>();
 		Connection con = getConnection();
 
@@ -177,25 +178,26 @@ public class ProductDAO extends DAO {
 	 */
 	public boolean insert(String name, int price, int count, int categoryId, String description, String fileName)
 			throws Exception {
-		Connection con = getConnection();
-		PreparedStatement ps;
 
-		ps = con.prepareStatement(
-				"INSERT INTO products (name,price,count,category_id,description,fileName) VALUES (?,?,?,?,?,?)");
-		ps.setString(1, name);
-		ps.setInt(2, price);
-		ps.setInt(3, count);
-		ps.setInt(4, categoryId);
-		ps.setString(5, description);
-		ps.setString(6, fileName);
-		int line = ps.executeUpdate();
+		String sql = "INSERT INTO products (name,price,count,category_id,description,fileName) VALUES (?,?,?,?,?,?)";
+		try (Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);) {
 
-		if (line < 0)
-			return false;
+			ps.setString(1, name);
+			ps.setInt(2, price);
+			ps.setInt(3, count);
+			ps.setInt(4, categoryId);
+			ps.setString(5, description);
+			ps.setString(6, fileName);
+			int line = ps.executeUpdate();
 
-		ps.close();
-		con.close();
-		return true;
+			if (line < 0) {
+				return false;
+			}
+
+			return true;
+		}
+
 	}
 
 	/**
@@ -237,26 +239,24 @@ public class ProductDAO extends DAO {
 	public boolean update(int productId, String name, int categoryId, int price, int count, String description,
 			String fileName) throws Exception {
 
-		Connection con = getConnection();
-		PreparedStatement ps;
+		String sql = "UPDATE products SET name = ?,price = ?,count = ?,category_id = ?, description = ?,fileName = ?  WHERE product_id = ?";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
 
-		ps = con.prepareStatement(
-				"UPDATE products SET name = ?,price = ?,count = ?,category_id = ?, description = ?,fileName = ?  WHERE product_id = ?");
-		ps.setString(1, name);
-		ps.setInt(2, price);
-		ps.setInt(3, count);
-		ps.setInt(4, categoryId);
-		ps.setString(5, description);
-		ps.setString(6, fileName);
-		ps.setInt(7, productId);
-		int line = ps.executeUpdate();
+			ps.setString(1, name);
+			ps.setInt(2, price);
+			ps.setInt(3, count);
+			ps.setInt(4, categoryId);
+			ps.setString(5, description);
+			ps.setString(6, fileName);
+			ps.setInt(7, productId);
+			int line = ps.executeUpdate();
 
-		if (line < 0)
-			return false;
-
-		ps.close();
-		con.close();
-		return true;
+			if (line < 0) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 	/**
@@ -300,19 +300,20 @@ public class ProductDAO extends DAO {
 	 * @throws Exception
 	 */
 	public boolean delete(int id) throws Exception {
+		String sql = "DELETE FROM products WHERE product_id = ?";
+		try (Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);) {
 
-		Connection con = getConnection();
-		PreparedStatement ps;
+			ps.setInt(1, id);
+			int line = ps.executeUpdate();
 
-		ps = con.prepareStatement("DELETE FROM products WHERE product_id = ?");
-		ps.setInt(1, id);
-		int line = ps.executeUpdate();
+			if (line < 0) {
+				return false;
+			}
 
-		if (line < 0)
-			return false;
-
-		ps.close();
-		con.close();
-		return true;
+			return true;
+		}
 	}
+	
+	
 }

@@ -87,6 +87,8 @@ public class PurchaseDAO extends DAO {
 			list.add(pur);
 		}
 
+		ps.close();
+		con.close();
 		return list;
 	}
 	
@@ -127,6 +129,8 @@ public class PurchaseDAO extends DAO {
 			list.add(pur);
 		}
 
+		ps.close();
+		con.close();
 		return list;
 	}
 	

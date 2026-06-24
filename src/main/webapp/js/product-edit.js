@@ -134,12 +134,10 @@ function validateNumber(field, rule, value) {
 	return true;
 }
 
-
-/* ----- file ----- 
+/*----- file ----- */
 function validateFile(field) {
 	if (!field.files || field.files.length === 0) {
-		showError(field, ".error-file", "画像を選択してください");
-		return false;
+		return true;
 	}
 
 	const file = field.files[0];
@@ -153,7 +151,7 @@ function validateFile(field) {
 
 	hideError(field, ".error-file");
 	return true;
-}*/
+}
 
 
 /* =========================
@@ -190,16 +188,16 @@ function updateButton() {
 
 	const radioValid = validateRadio("categoryId");
 
-	/*//
-	let fileValid = false;
+	//画像
+	let fileValid = true;
 
-	    選択されてるときだけチェック
-	    if (fileField && fileField.files.length > 0) {
+	    /*選択されてるときだけチェック*/
+	    if (fileField) {
 	        fileValid = validateFile(fileField);
-	    }*/
+	   }
 
 
-	submitBtn.disabled = !(textValid && radioValid);
+	submitBtn.disabled = !(textValid && radioValid&&fileValid);
 }
 
 

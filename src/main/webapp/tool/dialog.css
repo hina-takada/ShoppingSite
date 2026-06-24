@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+/*全体*/
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+body{
+	margin: 0;
+}
+
+/*ダイヤログ全体*/
+.confirm-dialog {
+	width: 500px;
+	height: 250px;
+	
+	margin-top: 150px;
+	padding: 0;
+	
+	border: 2px solid rgb(50, 26, 7,0.5);
+	border-radius: 10px;
+	
+	background-color: var(--main-color);
+}
+
+/*中身*/
+.dialog-body {
+	padding: 40px;
+	text-align: center;
+}
+
+/*メッセージ*/
+.dialog-massage {
+	font-size: 20px;
+	color: var(--font-main-color);
+	margin-bottom: 30px;
+}
+
+/*ボタン*/
+.buttons {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.button {
+	padding: 0.8rem 5rem;
+	border: none;
+}
+
+/*ログアウトする場合*/
+.button-yes {
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+}
+
+.button-yes:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}
+
+/*ログアウトしない場合*/
+.button-no {
+	box-shadow: 0 6px 0 var(--back-shadow);
+	background-color: var(--back-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+}
+
+.button-no:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--back-shadow);
+}
