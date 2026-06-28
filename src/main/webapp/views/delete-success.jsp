@@ -2,27 +2,30 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%-- JSヘッダー --%>
-<c:set var="pageTitle" value="管理者編集完了 画面"></c:set>
+<c:set var="pageTitle" value="管理者削除完了 画面"></c:set>
 <c:set var="cssFile" value="/css/add-success.css"></c:set>
 <%@ include file="../tool/js-header.jsp"%>
-<main class="main">
 
+<main class="main">
 	<div class="header">
+	
 		<div class="logo">
 			<img alt="ロゴ" src="../img/logo.png">
-
-			<h1 class="title">編集登録完了</h1>
+			<h1 class="title">削除完了</h1>
 		</div>
 
 		<section class="card">
 			<p>
-				編集が完了しました <i class="fas fa-paw pow1"></i>
+				削除が完了しました。
+				<i class="fas fa-paw pow1"></i>
 			</p>
 
 			<div class="links-area">
-				<a href="admin-menu.jsp">管理者画面へ戻る</a>
+				<a href="HomeProduct.action">ホーム画面へ</a>
 			</div>
 		</section>
+	</div>
 </main>
+
 </body>
 </html>

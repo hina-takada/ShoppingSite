@@ -1,0 +1,310 @@
+@charset "UTF-8";
+
+
+* {
+
+	box-sizing: border-box;
+
+	font-family: "M PLUS Rounded 1c", sans-serif;
+
+}
+
+
+
+:root {
+
+	--main-color: rgb(253, 244, 230);
+
+	--sub-color: #d98b99;
+
+	--font-main-color: rgb(50, 26, 7);
+
+}
+
+
+
+body {
+
+	margin: 0;
+
+	background-color: var(--main-color);
+
+	color: var(--font-main-color);
+
+}
+
+
+
+
+.product-detail {
+
+	max-width: 300vh;
+
+	margin: auto;
+
+	padding: 40px;
+
+}
+
+
+
+
+.product-detail__title {
+
+	display: flex;
+
+	justify-content: center;
+
+	align-items: center;
+
+	gap: 20px;
+
+	margin-bottom: 40px;
+
+}
+
+
+
+
+.paw-group {
+
+	display: flex;
+
+	gap: 5px;
+
+	color: var(--sub-color);
+
+	font-size: .8rem;
+
+}
+
+
+
+
+.pow1 {
+
+	transform: rotate(80deg);
+
+}
+
+
+.pow2 {
+
+	transform: translateY(-8px) rotate(100deg);
+
+}
+
+
+.pow3 {
+
+	transform: rotate(80deg);
+
+}
+
+
+
+
+
+/* 商品カード */
+
+.product-detail__card {
+
+
+	display: grid;
+
+	grid-template-columns: 1fr 1fr;
+
+	gap: 40px;
+
+
+	background: white;
+
+	border-radius: 25px;
+
+	padding: 30px;
+
+
+	box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+
+
+}
+
+
+
+
+.product-detail__image img {
+
+
+	width: 100%;
+
+	height: 450px;
+
+	object-fit: cover;
+
+	border-radius: 20px;
+
+
+}
+
+
+
+
+
+.product-detail__info h2 {
+
+
+	font-size: 2rem;
+
+	margin-top: 0;
+
+
+}
+
+
+
+
+.category {
+
+	color: #777;
+
+}
+
+
+
+
+.price {
+
+
+	color: var(--sub-color);
+
+	font-size: 1.8rem;
+
+	font-weight: bold;
+
+
+}
+
+
+
+
+.price span {
+
+
+	font-size: .8rem;
+
+}
+
+
+
+
+
+.description {
+
+
+	line-height: 1.8;
+
+	margin: 30px 0;
+
+
+}
+
+
+
+
+
+.cart-form {
+
+
+	display: flex;
+
+	gap: 15px;
+
+
+}
+
+
+
+
+
+select {
+
+
+	padding: 10px;
+
+	border-radius: 10px;
+
+	border: 1px solid #ddd;
+
+
+}
+
+/* カートボタン */
+
+.cart-form{
+
+	display:flex;
+
+	align-items: center;
+
+	margin-top:1.5rem;
+
+	padding-bottom:1.5rem;
+
+}
+
+
+.cart-form button{
+
+
+	padding:0.8rem 5rem;
+
+	border:none;
+
+
+	box-shadow:0 6px 0 var(--sub-color);
+
+
+	background-color:var(--pinksub-color);
+
+
+	border-radius:999px;
+
+
+	transition:0.2s ease;
+
+
+	color:var(--font-main-color);
+
+
+	font-weight:bold;
+
+
+	cursor:pointer;
+
+
+}
+
+
+
+/* ボタンアニメーション */
+
+.cart-form button:active{
+
+
+	transform:scale(0.92) translateY(5px);
+
+
+	box-shadow:0 2px 0 var(--sub-color);
+
+
+}
+
+
+
+.stock-none {
+
+
+	background: #aaa;
+
+
+}

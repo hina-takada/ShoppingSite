@@ -10,315 +10,459 @@ import jp.co.aforce.beans.ProductBean;
 import jp.co.aforce.beans.UpdateProductBeen;
 
 public class ProductDAO extends DAO {
+
+
 	/**
 	 * 商品一覧取得
-	 * 
-	 * @return
-	 * @throws Exception
 	 */
 	public List<ProductBean> serch() throws Exception {
+
 		List<ProductBean> list = new ArrayList<>();
+
 		Connection con = getConnection();
 
+
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
-						+ "on p.category_id = c.category_id ORDER BY product_id");
+				"SELECT product_id,p.category_id,po.paw_id,c.name,p.name,price,stock,description,fileName,paw_name,paw_description "
+				+ "FROM products p JOIN categories c "
+				+ "ON p.category_id = c.category_id "
+				+ "JOIN paw_types po "
+				+ "ON p.paw_id = po.paw_id "
+				+ "ORDER BY product_id"
+		);
+
+
 		ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
+
+		while(rs.next()) {
+
 			ProductBean p = new ProductBean();
+
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("category_id"));
-			p.setCategoryName(rs.getString("category_name"));
-			p.setName(rs.getString("product_name"));
+			p.setPawId(rs.getInt("paw_id"));
+			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("p.name"));
+			p.setPawName(rs.getString("paw_name"));
 			p.setPrice(rs.getInt("price"));
-			p.setCount(rs.getInt("count"));
+
+			p.setStock(rs.getInt("stock"));
+
 			p.setDescription(rs.getString("description"));
+			p.setPawDescription(rs.getString("paw_description"));
 			p.setFileName(rs.getString("fileName"));
+
 			list.add(p);
 		}
+
 
 		rs.close();
 		ps.close();
 		con.close();
+
 		return list;
 	}
+
+
+
 
 	/**
 	 * 商品検索
-	 * 
-	 * @param keyword
-	 * @return
-	 * @throws Exception
 	 */
 	public List<ProductBean> serch(String keyword) throws Exception {
+
+
 		List<ProductBean> list = new ArrayList<>();
+
 		Connection con = getConnection();
 
+
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
-						+ "on p.category_id = c.category_id where p.name like ? ORDER BY product_id");
+				"SELECT product_id,p.category_id,po.paw_id,c.name,p.name,price,stock,description,fileName,paw_name,paw_description "
+				+ "FROM products p JOIN categories c "
+				+ "ON p.category_id = c.category_id "
+				+ "JOIN paw_types po "
+				+ "ON p.paw_id = po.paw_id "
+				+ "WHERE p.name LIKE ? "
+				+ "ORDER BY product_id"
+		);
+
+
 		ps.setString(1, "%" + keyword + "%");
+
+
 		ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
+
+
+		while(rs.next()) {
+
+
 			ProductBean p = new ProductBean();
+
+
 			p.setProductId(rs.getInt("product_id"));
-			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setCategoryName(rs.getString("category_name"));
-			p.setName(rs.getString("product_name"));
+			p.setCategoryId(rs.getInt("category_id"));
+			p.setPawId(rs.getInt("paw_id"));
+			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("p.name"));
+			p.setPawName(rs.getString("paw_name"));
 			p.setPrice(rs.getInt("price"));
-			p.setCount(rs.getInt("count"));
+
+			p.setStock(rs.getInt("stock"));
+
 			p.setDescription(rs.getString("description"));
+			p.setPawDescription(rs.getString("paw_description"));
 			p.setFileName(rs.getString("fileName"));
+
+
 			list.add(p);
+
 		}
+
 
 		rs.close();
 		ps.close();
 		con.close();
+
+
 		return list;
 	}
 
+
+
+
+
+
 	/**
-	 * 
-	 * 
-	 * @param productId
-	 * @return
-	 * @throws Exception
+	 * 商品詳細取得
 	 */
 	public ProductBean productSerch(int productId) throws Exception {
+
+
 		ProductBean p = null;
+
+
 		Connection con = getConnection();
 
+
+
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
-						+ "on p.category_id = c.category_id WHERE product_id = ?");
+				"SELECT product_id,p.category_id,po.paw_id,c.name,p.name,price,stock,description,fileName,paw_name,paw_description "
+				+ "FROM products p JOIN categories c "
+				+ "ON p.category_id = c.category_id "
+				+ "JOIN paw_types po "
+				+ "ON p.paw_id = po.paw_id "
+				+ "WHERE product_id = ?"
+		);
+
+
 		ps.setInt(1, productId);
+
+
 		ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
+
+
+		while(rs.next()) {
+
+
 			p = new ProductBean();
+
+
 			p.setProductId(rs.getInt("product_id"));
-			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setName(rs.getString("product_name"));
-			p.setCategoryName(rs.getString("category_name"));
+			p.setCategoryId(rs.getInt("category_id"));
+			p.setPawId(rs.getInt("paw_id"));
+			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("p.name"));
+			p.setPawName(rs.getString("paw_name"));
 			p.setPrice(rs.getInt("price"));
-			p.setCount(rs.getInt("count"));
+
+			p.setStock(rs.getInt("stock"));
+
 			p.setDescription(rs.getString("description"));
+			p.setPawDescription(rs.getString("paw_description"));
 			p.setFileName(rs.getString("fileName"));
+
 		}
+
 
 		rs.close();
 		ps.close();
 		con.close();
+
+
 		return p;
+
 	}
 
+
+
+
+
 	/**
-	 * 総件数を取得	
+	 * 総件数
 	 */
 	public int countAll() throws Exception {
 
-		String sql = "SELECT count(*) FROM products";
-		try (Connection con = getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();) {
 
-			if (rs.next()) {
+		String sql = "SELECT count(*) FROM products";
+
+
+		try(Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()){
+
+
+			if(rs.next()) {
+
 				return rs.getInt(1);
+
 			}
+
 			return 0;
 		}
+
 	}
 
+
+
+
+
 	/**
-	 * 商品一覧取得(商品管理用)
-	 * 
-	 * @return
-	 * @throws Exception
+	 * 商品管理一覧
 	 */
-	public List<ProductBean> serchManerger(int limit, int offset) throws Exception {
+	public List<ProductBean> serchManerger(int limit,int offset) throws Exception {
+
+
 		List<ProductBean> list = new ArrayList<>();
+
 		Connection con = getConnection();
 
+
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name,p.name,price,count,description,fileName FROM products p join categories c "
-						+ "on p.category_id = c.category_id ORDER BY product_id LIMIT ? offset ?");
+				"SELECT product_id,p.category_id,po.paw_id,c.name,p.name,price,stock,description,fileName,paw_name,paw_description "
+				+ "FROM products p JOIN categories c "
+				+ "ON p.category_id = c.category_id "
+				+ "JOIN paw_types po "
+				+ "ON p.paw_id = po.paw_id "
+				+ "ORDER BY product_id LIMIT ? OFFSET ?"
+		);
+
+
 		ps.setInt(1, limit);
 		ps.setInt(2, offset);
+
+
+
 		ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
+
+
+		while(rs.next()) {
+
+
 			ProductBean p = new ProductBean();
+
+
 			p.setProductId(rs.getInt("product_id"));
 			p.setCategoryId(rs.getInt("category_id"));
+			p.setPawId(rs.getInt("paw_id"));
+
 			p.setCategoryName(rs.getString("c.name"));
 			p.setName(rs.getString("p.name"));
+
+			p.setPawName(rs.getString("paw_name"));
+
 			p.setPrice(rs.getInt("price"));
-			p.setCount(rs.getInt("count"));
+			p.setStock(rs.getInt("stock"));
+
 			p.setDescription(rs.getString("description"));
+			p.setPawDescription(rs.getString("paw_description"));
+
 			p.setFileName(rs.getString("fileName"));
+
+
 			list.add(p);
+
 		}
+
 
 		ps.close();
 		con.close();
+
+
 		return list;
+
 	}
 
+
+
+
+
 	/**
-	 *商品登録 
-	 * 
-	 * @param id
-	 * @param pass
-	 * @param lastName
-	 * @param firstName
-	 * @param address
-	 * @param mailAddress
-	 * @return
-	 * @throws Exception
+	 * 商品登録
 	 */
-	public boolean insert(String name, int price, int count, int categoryId, String description, String fileName)
-			throws Exception {
+	public boolean insert(String name,int price,int stock,int categoryId,
+			String description,String fileName,int pawId) throws Exception {
 
-		String sql = "INSERT INTO products (name,price,count,category_id,description,fileName) VALUES (?,?,?,?,?,?)";
-		try (Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setString(1, name);
-			ps.setInt(2, price);
-			ps.setInt(3, count);
-			ps.setInt(4, categoryId);
-			ps.setString(5, description);
-			ps.setString(6, fileName);
-			int line = ps.executeUpdate();
+		String sql =
+				"INSERT INTO products "
+				+ "(name,price,stock,category_id,description,fileName,paw_id) "
+				+ "VALUES (?,?,?,?,?,?,?)";
 
-			if (line < 0) {
-				return false;
-			}
 
-			return true;
+
+		try(Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)){
+
+
+			ps.setString(1,name);
+			ps.setInt(2,price);
+			ps.setInt(3,stock);
+			ps.setInt(4,categoryId);
+			ps.setString(5,description);
+			ps.setString(6,fileName);
+			ps.setInt(7,pawId);
+
+
+			return ps.executeUpdate() > 0;
+
 		}
 
 	}
 
+
+
+
+
+
 	/**
-	 * IDからカテゴリー名を取得
-	 * 
-	 * @param id
-	 * @return
-	 * @throws Exception 
+	 * 商品更新
 	 */
-	public String getCategoryName(int id) throws Exception {
-		String categoryName = null;
+	public boolean update(int productId,String name,int categoryId,int price,int stock,
+			String description,String fileName,int pawId) throws Exception {
 
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT name FROM categories WHERE category_id = ?");
-		ps.setInt(1, id);
-		ResultSet rs = ps.executeQuery();
 
-		if (rs.next()) {
-			categoryName = rs.getString("name");
+		String sql =
+				"UPDATE products SET "
+				+ "name=?,price=?,stock=?,category_id=?,description=?,fileName=?,paw_id=? "
+				+ "WHERE product_id=?";
+
+
+
+		try(Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)){
+
+
+			ps.setString(1,name);
+			ps.setInt(2,price);
+			ps.setInt(3,stock);
+			ps.setInt(4,categoryId);
+			ps.setString(5,description);
+			ps.setString(6,fileName);
+			ps.setInt(7,pawId);
+			ps.setInt(8,productId);
+
+
+
+			return ps.executeUpdate() > 0;
+
 		}
 
-		rs.close();
-		ps.close();
-		con.close();
-		return categoryName;
 	}
 
-	/**
-	 * 商品情報の編集（更新）
-	 * 
-	 * @param i
-	 * @param pass
-	 * @param lastName
-	 * @param firstName
-	 * @param j
-	 * @param k
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean update(int productId, String name, int categoryId, int price, int count, String description,
-			String fileName) throws Exception {
 
-		String sql = "UPDATE products SET name = ?,price = ?,count = ?,category_id = ?, description = ?,fileName = ?  WHERE product_id = ?";
-		try (Connection con = getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setString(1, name);
-			ps.setInt(2, price);
-			ps.setInt(3, count);
-			ps.setInt(4, categoryId);
-			ps.setString(5, description);
-			ps.setString(6, fileName);
-			ps.setInt(7, productId);
-			int line = ps.executeUpdate();
 
-			if (line < 0) {
-				return false;
-			}
-			return true;
-		}
-	}
+
 
 	/**
-	 * 更新用の検索
-	 * 
-	 * @return
-	 * @throws Exception
+	 * 更新検索
 	 */
 	public UpdateProductBeen updateSerch(int productId) throws Exception {
+
+
 		UpdateProductBeen p = null;
+
+
 		Connection con = getConnection();
 
+
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT product_id,p.category_id,c.name as category_name,p.name as product_name,price,count,description,fileName FROM products p join categories c "
-						+ "on p.category_id = c.category_id WHERE product_id = ?");
-		ps.setInt(1, productId);
+				"SELECT product_id,p.category_id,po.paw_id,c.name,p.name,price,stock,description,fileName,paw_name,paw_description "
+				+ "FROM products p JOIN categories c "
+				+ "ON p.category_id=c.category_id "
+				+ "JOIN paw_types po "
+				+ "ON p.paw_id=po.paw_id "
+				+ "WHERE product_id=?"
+		);
+
+
+		ps.setInt(1,productId);
+
+
 		ResultSet rs = ps.executeQuery();
 
-		while (rs.next()) {
+
+
+		while(rs.next()) {
+
+
 			p = new UpdateProductBeen();
+
+
 			p.setProductId(rs.getInt("product_id"));
-			p.setCategoryId(rs.getInt("p.category_id"));
-			p.setName(rs.getString("product_name"));
-			p.setCategoryName(rs.getString("category_name"));
+			p.setCategoryId(rs.getInt("category_id"));
+			p.setPawId(rs.getInt("paw_id"));
+			p.setCategoryName(rs.getString("c.name"));
+			p.setName(rs.getString("p.name"));
+			p.setPawName(rs.getString("paw_name"));
 			p.setPrice(rs.getInt("price"));
-			p.setCount(rs.getInt("count"));
+
+			p.setStock(rs.getInt("stock"));
+
 			p.setDescription(rs.getString("description"));
+			p.setPawDescription(rs.getString("paw_description"));
 			p.setFileName(rs.getString("fileName"));
+
 		}
+
 
 		rs.close();
 		ps.close();
 		con.close();
+
+
 		return p;
+
 	}
 
-	/**
-	 * 商品登録の削除
-	 * 
-	 * @param id
-	 * @return
-	 * @throws Exception
-	 */
+
+
+
+
 	public boolean delete(int id) throws Exception {
-		String sql = "DELETE FROM products WHERE product_id = ?";
-		try (Connection con = getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setInt(1, id);
-			int line = ps.executeUpdate();
 
-			if (line < 0) {
-				return false;
-			}
+		String sql =
+				"DELETE FROM products WHERE product_id = ?";
 
-			return true;
+
+
+		try(Connection con=getConnection();
+				PreparedStatement ps=con.prepareStatement(sql)){
+
+
+			ps.setInt(1,id);
+
+
+			return ps.executeUpdate() > 0;
+
 		}
+
 	}
-	
-	
+
 }

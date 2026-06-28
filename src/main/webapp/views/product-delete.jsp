@@ -1,21 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%-- JSヘッダー --%>
+<c:set var="pageTitle" value="商品削除確認 画面"></c:set>
+<c:set var="cssFile" value="/css/delete.css"></c:set>
+<%@ include file="../tool/js-header.jsp"%>
+<main class="delete-main">
+	<div class="warning-box">
+		<p>以下の商品を削除します。</p>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>削除画面</title>
-</head>
-<body>
+		<table>
+			<tr>
+				<th>商品名</th>
+				<td>"${upProduct.name}</td>
+			</tr>
+			<tr>
+				<th>科目名</th>
+				<td>${upProduct.categoryName}</td>
+			</tr>
+		</table>
 
-	<h1>商品を削除してよろしいですか？</h1>
-	<p>商品名：<c:out value="${upProduct.name}"></c:out></p>
-	<p>科目名：<c:out value="${upProduct.categoryName}"></c:out></p>
+		<p class="warning-message">※削除したデータは元に戻せません</p>
+	</div>
 
-	<button type="button" onclick="location.href = 'ProductDelete.action'">はい</button>
-	<button type="button" onclick="location.href = 'product-menu.jsp'">いいえ</button>
+
+	<div class="button-area">
+		<form action="ProductDelete.action" method="post">
+			<button class="delete-btn" type="submit">削除する</button>
+		</form>
+		
+		<button class="cancel-btn" type="button" onclick="location.href = 'product-menu.jsp'">いいえ</button>
+	
+	</div>
+</main>
 
 </body>
 </html>

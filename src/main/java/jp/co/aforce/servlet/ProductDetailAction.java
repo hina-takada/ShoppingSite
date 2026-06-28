@@ -17,13 +17,13 @@ public class ProductDetailAction extends Action{
 		
 		String idS = request.getParameter("id");
 		boolean vali = validation(idS);
-		if(!vali) return "error.jsp";
+		if(!vali) return "product-detail-error.jsp";
 		
 		 int id = Integer.parseInt(idS);
 		 ProductDAO dao = new ProductDAO();
 		 ProductBean product = dao.productSerch(id);
 		 
-		 if(product == null)return "nullerror.jsp";
+		 if(product == null)return "product-detail-error.jsp";
 
 		 session.setAttribute("product", product);
 		return "product-detail.jsp";

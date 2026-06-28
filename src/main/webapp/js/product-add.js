@@ -164,16 +164,26 @@ function validateRadio(name) {
 		`input[name="${name}"]:checked`
 	);
 
-	const error = document.querySelector(".error-chack");
+	const radios = document.querySelector(
+		`input[name="${name}"]`
+	);
+
+	const error = radios.closest(".checkbox")
+		.querySelector(".error-chack");
+
 
 	if (checked) {
+
 		error.textContent = "";
 		error.classList.add("is-hidden");
+
 		return true;
 	}
 
+
 	error.textContent = "選択してください";
 	error.classList.remove("is-hidden");
+
 
 	return false;
 }
@@ -187,10 +197,11 @@ function updateButton() {
 	const textValid = [...textFields]
 		.every(f => validate(f));
 
-	const radioValid = validateRadio("categoryId");
+	const categoryValid = validateRadio("categoryId");
+	const pawValid = validateRadio("pawId");
 	const fileValid = validateFile(fileField);
 
-	submitBtn.disabled = !(textValid && radioValid && fileValid);
+	submitBtn.disabled = !(textValid && categoryValid && pawValid && fileValid);
 }
 
 
@@ -235,21 +246,21 @@ const message = document.getElementById("dialogMessage");
 const okBtu = document.getElementById("okBtu");
 const noBtu = document.getElementById("noBtu");
 
-if(form && dialog){
-form.addEventListener("submit", function(e){
-	e.preventDefault();
-	
-	message.textContent = "商品を登録しますか？"
-	
-	dialog.showModal();
-});
+if (form && dialog) {
+	form.addEventListener("submit", function(e) {
+		e.preventDefault();
 
-noBtu.addEventListener("click", function(){
-	dialog.close();
-});
+		message.textContent = "商品を登録しますか？"
 
-okBtu.addEventListener("click", function(){
-	form.submit();
-});
+		dialog.showModal();
+	});
+
+	noBtu.addEventListener("click", function() {
+		dialog.close();
+	});
+
+	okBtu.addEventListener("click", function() {
+		form.submit();
+	});
 
 }

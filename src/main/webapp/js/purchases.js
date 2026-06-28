@@ -5,6 +5,8 @@ const errorMsgFName = document.getElementById("error-msg-firstname");
 const errorMsgLName = document.getElementById("error-msg-lastname");
 const errorMsgAddress = document.getElementById("error-msg-address");
 
+const purchaseButton = document.querySelector(".purchase-button");
+
 function valideteInput(input, errorMsg, min, max, regex) {
 	const value = input.value;
 	const length = value.length;
@@ -33,9 +35,40 @@ function valideteInput(input, errorMsg, min, max, regex) {
 }
 
 function updatebuy() {
-	valideteInput(buyLastName, errorMsgLName, 1, 32, /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/);
-	valideteInput(buyFirstName, errorMsgFName, 1, 32, /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/);
-	valideteInput(buyAddress, errorMsgAddress, 1, 128, /^[^<>]+$/);
+
+	const lastNameCheck = valideteInput(
+		buyLastName,
+		errorMsgLName,
+		1,
+		32,
+		/^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/
+	);
+
+	const firstNameCheck = valideteInput(
+		buyFirstName,
+		errorMsgFName,
+		1,
+		32,
+		/^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/
+	);
+
+	const addressCheck = valideteInput(
+		buyAddress,
+		errorMsgAddress,
+		1,
+		128,
+		/^[^<>]+$/
+	);
+
+
+	const result = lastNameCheck && firstNameCheck && addressCheck;
+
+
+	// OKなら押せる
+	purchaseButton.disabled = !result;
+
+
+	return result;
 }
 
 buyLastName.addEventListener("input", updatebuy);
@@ -43,8 +76,16 @@ buyFirstName.addEventListener("input", updatebuy);
 buyAddress.addEventListener("input", updatebuy);
 
 
+window.addEventListener("DOMContentLoaded", () => {
+	updatebuy();
+});
+
+
+
 /* ダイヤログ */
-const form = document.querySelector("form");
+/* ダイアログ */
+
+const form = document.querySelector(".purchase-form form");
 
 const dialog = document.getElementById("myDialog");
 const message = document.getElementById("dialogMessage");
@@ -52,18 +93,46 @@ const message = document.getElementById("dialogMessage");
 const okBtu = document.getElementById("okBtu");
 const noBtu = document.getElementById("noBtu");
 
-if (form && dialog) {
-	form.addEventListener("submit", function(e) {
+
+form.addEventListener("submit", function(e) {
+
+
+	// 入力チェック
+	if (!updatebuy()) {
+
 		e.preventDefault();
-		message.textContent = "購入を確定します。よろしいですか？";
-		dialog.showModal();
-	});
 
-	noBtu.addEventListener("click", function() {
-		dialog.close();
-	});
+		return;
 
-	okBtu.addEventListener("click", function() {
-		form.submit();
-	});
-}
+	}
+
+
+	// 送信停止
+	e.preventDefault();
+
+
+	message.textContent =
+		"購入を確定します。よろしいですか？";
+
+
+	dialog.showModal();
+
+
+});
+
+
+
+noBtu.addEventListener("click", function() {
+
+	dialog.close();
+
+});
+
+
+
+okBtu.addEventListener("click", function() {
+
+	form.submit();
+
+});
+

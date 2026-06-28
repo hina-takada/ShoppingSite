@@ -17,6 +17,7 @@ public class EditValidationAction extends Action{
 		String mode = request.getParameter("model");
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
+		String passConfirm = request.getParameter("passConfirm");
 		String lastName = request.getParameter("lastName");
 		String firstName = request.getParameter("firstName");
 		String address = request.getParameter("address");
@@ -28,7 +29,7 @@ public class EditValidationAction extends Action{
 			return "edit-error.jsp";
 		}
 		
-		boolean isValid = validation(user.getId(),id,pass,lastName, firstName, address, mailAddress);
+		boolean isValid = validation(user.getId(),id,passConfirm,pass,lastName, firstName, address, mailAddress);
 		if(isValid == false) {
 			System.out.println("edit-errorエラー");
 			return "edit-error.jsp";
@@ -38,10 +39,12 @@ public class EditValidationAction extends Action{
 		
 		upUser.setId(id);
 		upUser.setPass(pass);
+		upUser.setPassConfirm(passConfirm);
 		upUser.setLastName(lastName);
 		upUser.setFirstName(firstName);
 		upUser.setAddress(address);
 		upUser.setMailAddress(mailAddress);
+		
 		
 		session.setAttribute("upUser", upUser);
 		session.setMaxInactiveInterval(60*3);
@@ -53,15 +56,20 @@ public class EditValidationAction extends Action{
 	
 	
 	//入力バリデーション
-		private boolean validation(String uid,String id, String pass, String lastName, String firstName, String address,
+		private boolean validation(String uid,String id,String passConfirm, String pass, String lastName, String firstName, String address,
 				String mailAddress) {
 
-			if (id == null || id.isBlank() ||!uid.equals(id) || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
+			if (id == null || id.isBlank() || id.length() < 4 || id.length() > 10 || !id.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 				System.out.println("idエラー");
 				return false;
 			}
 			
 			if (pass == null || pass.isBlank() || pass.length() < 8 || pass.length() > 32 || !pass.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
+				System.out.println("passエラー");
+				return false;
+			}
+			
+			if (passConfirm == null || passConfirm.isBlank() || passConfirm.length() < 8 || passConfirm.length() > 32 || !passConfirm.matches("^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$")) {
 				System.out.println("passエラー");
 				return false;
 			}

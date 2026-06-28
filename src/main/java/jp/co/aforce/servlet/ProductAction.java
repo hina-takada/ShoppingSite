@@ -31,7 +31,7 @@ public class ProductAction extends Action{
 		
 		List<ProductBean> products = dao.serchManerger(limit,offset);
 		
-		if(products == null) return "product-error.jsp";
+		if(products == null || products.isEmpty()) return "product-error.jsp";
 		
 		session.setAttribute("products", products);
 		session.setAttribute("currentPage", page);

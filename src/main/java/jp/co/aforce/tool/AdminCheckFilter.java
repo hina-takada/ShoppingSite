@@ -45,7 +45,7 @@ public class AdminCheckFilter extends HttpFilter {
 		HttpSession session = req.getSession(false);
 		
 		if(session == null) {
-			res.sendRedirect(req.getContextPath() + "HomeProduct.action");
+			res.sendRedirect(req.getContextPath() + "/views/HomeProduct.action");
 			return;
 		}
 				

@@ -21,7 +21,7 @@
 		<div class="header-serch">
 		<form action="HomeSerch.action" method="get">
 			<input type="text" name="keyword" value="${keyword}"> 
-			<button type="submit" value="検索">
+			<button type="submit"><i class="fas fa-search"></i></button>
 		</form>
 		</div>
 

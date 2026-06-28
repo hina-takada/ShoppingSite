@@ -20,12 +20,12 @@ public class ProductDeleteAction extends Action{
 		String id = Integer.toString(upProduct.getProductId());
 		
 		if(upProduct == null || id == null || id.isBlank()) {
-			return "product-error.jsp";
+			return "product-delete-error.jsp";
 		}
 		
 		boolean line = dao.delete(upProduct.getProductId());
 		
-		if(line == false)return "product-error.jsp";
+		if(line == false)return "product-delete-error.jsp";
 		
 		
 		session.removeAttribute("upProduct");

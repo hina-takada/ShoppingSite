@@ -186,12 +186,28 @@ body {
 
 }
 
+.form-action button{
+	padding: 0.8rem 12rem;
+	border: none;
+
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+
+}
+
 #vali-btu {
 	font-size: 1rem;
 }
 
 /*アニメーション*/
 .form-action input:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}
+
+.form-action button:active {
 	transform: scale(0.92) translateY(5px);
 	box-shadow: 0 2px 0 var(--sub-color);
 }

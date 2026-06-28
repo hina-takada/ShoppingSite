@@ -10,6 +10,7 @@ import jp.co.aforce.tool.Action;
 
 public class DeleteAction extends Action{
 
+	@SuppressWarnings("unused")
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -21,29 +22,22 @@ public class DeleteAction extends Action{
 		String role = user.getRole();
 		
 		if(user == null || user.getId() == null || user.getId().isBlank()) {
-			if("ADMIN".equals(role)) {
-				return "admin-delete-success.jsp";
-			}
 			return "user-delete-success.jsp";
 		}
 		
 		
 		boolean line = dao.delete(user.getId());
 		if(line == false) {
-			if("ADMIN".equals(role)) {
-				return "admin-delete-success.jsp";
-			}
-			return "user-delete-success.jsp";
+			return "delete-error.jsp";
 		}
-		
 		
 		
 		session.removeAttribute("user");
-		if("ADMIN".equals(role)) {
-			return "admin-delete-success.jsp";
+		if(user == null) {
+			return "delete-error.jsp";
 		}
-		
-		return "user-delete-success.jsp";
+
+		return "delete-success.jsp";
 	}
 
 }

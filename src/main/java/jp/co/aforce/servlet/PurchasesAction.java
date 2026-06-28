@@ -43,7 +43,31 @@ public class PurchasesAction extends Action {
 
 		PurchaseDAO dao = new PurchaseDAO();
 		List<Item> items = (List<Item>)session.getAttribute("cart");
-		if(items == null ||  !dao.insert(items,tax,totalTax,SHIPPING_FEE,grandTotal,userid, lastName, firstName, address,orderId))
+		
+		if(items == null || items.isEmpty()) {
+		    return "purchase-error-insert";
+		}
+
+		for(Item item : items) {
+
+		    int productId = item.getProduct().getProductId();
+		    int purchaseCount = item.getCount();
+
+		    /**
+		     * 在庫不足
+		     */
+		    if(!dao.hasStock(productId, purchaseCount)) {
+
+		        request.setAttribute(
+		            "errorMessage",
+		            item.getProduct().getName() + " の在庫が不足しています。"
+		        );
+
+		        return "stock-error.jsp";
+		    }
+		}
+		
+		if(!dao.insert(items,tax,totalTax,SHIPPING_FEE,grandTotal,userid, lastName, firstName, address,orderId))
 			return "puchase-error-insert";
 		
 		session.removeAttribute("items");

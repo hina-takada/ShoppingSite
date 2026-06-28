@@ -14,6 +14,7 @@ const state = {
 	filed: {
 		id: false,
 		pass: false,
+		passConfirm: false,
 		lastName: false,
 		firstName: false,
 		address: false,
@@ -31,6 +32,7 @@ const state = {
 const rules = {
 	id: { min: 4, max: 10, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
 	pass: { min: 8, max: 32, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
+	passConfirm: { min: 8, max: 32, regex: /^[a-zA-Z0-9][a-zA-Z0-9@#$%&]*$/, message: "使用できない文字が含まれています" },
 	lastName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	firstName: { min: 1, max: 32, regex: /^[ぁ-んァ-ヶ一-龠々A-Za-z]+$/, message: "使用できない文字が含まれています" },
 	address: { min: 1, max: 128, regex: /^[^<>]+$/, message: "使用できない文字が含まれています" },
@@ -41,13 +43,21 @@ const rules = {
    エラー
 ======================= */
 function showError(input, selector, msg) {
-	const el = input.parentElement.querySelector(selector);
+	const field = input.closest(".field");
+	const el = field.querySelector(selector);
+
+	if (!el) return;
+
 	el.textContent = msg;
 	el.classList.remove("is-hidden");
 }
 
 function hideError(input, selector) {
-	const el = input.parentElement.querySelector(selector);
+	const field = input.closest(".field");
+	const el = field.querySelector(selector);
+
+	if (!el) return;
+
 	el.textContent = "";
 	el.classList.add("is-hidden");
 }
@@ -58,6 +68,38 @@ function hideError(input, selector) {
 function validate(input) {
 	const rule = rules[input.name];
 	const value = input.value;
+
+	// パスワード確認
+	if (input.name === "passConfirm") {
+
+		const pass = document.querySelector("input[name='pass']").value;
+
+		if (value === "") {
+			state.filed.passConfirm = false;
+			hideError(input, ".error-length");
+			return false;
+		}
+
+
+		if (value !== pass) {
+
+			state.filed.passConfirm = false;
+
+			showError(
+				input,
+				".error-length",
+				"パスワードが一致しません"
+			);
+
+			return false;
+		}
+
+
+		state.filed.passConfirm = true;
+		hideError(input, ".error-length");
+
+		return true;
+	}
 
 	if (!rule) return true;
 
@@ -125,7 +167,18 @@ inputs.forEach(input => {
 
 	input.addEventListener("input", () => {
 		validate(input);
+		// パスワード変更時、確認用も再チェック
+		if (input.name === "pass") {
+
+			const confirm =
+				document.querySelector("input[name='passConfirm']");
+
+			if (confirm.value !== "") {
+				validate(confirm);
+			}
+		}
 		updateButton();
+		
 	});
 });
 
@@ -164,6 +217,19 @@ idInput.addEventListener("input", () => {
 		}
 
 		hideError(idInput, ".error-length");
+		
+		/* 自分のIDならOK */
+		if (value === currentId) {
+
+			state.id.server = true;
+			state.filed.id = true;
+
+			hideError(idInput, ".error-id");
+
+			updateButton();
+			return;
+
+		}
 
 		/* ② サーバーチェック */
 		const data = await checkIdServer(value);
@@ -222,6 +288,8 @@ window.addEventListener("load", async () => {
 		return;
 	}
 
+
+
 	const data = await checkIdServer(value);
 
 	if (!data) return;
@@ -235,3 +303,34 @@ window.addEventListener("load", async () => {
 
 	updateButton();
 });
+
+/*パスワード伏*/
+
+function setupPasswordToggle(inputId, eyeId) {
+
+	const input = document.getElementById(inputId);
+	const eye = document.getElementById(eyeId);
+
+	eye.addEventListener("click", () => {
+
+		if (input.type === "password") {
+
+			input.type = "text";
+
+			eye.classList.remove("fa-eye");
+			eye.classList.add("fa-eye-slash");
+
+		} else {
+
+			input.type = "password";
+
+			eye.classList.remove("fa-eye-slash");
+			eye.classList.add("fa-eye");
+		}
+	});
+}
+
+setupPasswordToggle("pass", "pass-eye");
+setupPasswordToggle("passConfirm", "confirm-eye");
+
+/*パスワード伏*/

@@ -8,18 +8,18 @@
 
 <div class="error-main">
 
-<h2 class="error-title">商品編集エラー</h2>
+<h2 class="error-title">画面遷移エラー</h2>
 <main class="error-card">
 
 	<img src="../img/error_img.jpg">
 
 	<div class="error-text">
-		<p>商品の編集ができませんでした</p>
+		<p>商品詳細画面に遷移できませんでした</p>
 
 
 		<div class="back-link">
 			<span class="icon"> <i class="fas fa-arrow-right"></i>
-			</span><a href="admin-menu.jsp">管理者画面へ戻る</a>
+			</span><a href="HomeProduct.action">ホーム画面へ戻る</a>
 		</div>
 	</div>
 

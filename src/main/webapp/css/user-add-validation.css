@@ -136,7 +136,7 @@ body {
 	font-size: 1.1em;
 }
 
-.link-area:active {
+.link-area a:active {
 	transform: scale(0.92) translateY(5px);
 	box-shadow: 0 2px 0 var(--back-shadow);
 }

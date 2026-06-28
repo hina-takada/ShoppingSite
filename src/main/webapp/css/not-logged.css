@@ -1,4 +1,142 @@
 @charset "UTF-8";
 
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--link-color: rgb(83, 176, 253);
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+}
 
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
 
+body {
+	margin: 0;
+	color: var(--font-main-color);
+	background-color: rgb(253, 244, 230, 0.4);
+}
+
+.auth {
+	max-width: 1400px;
+	margin: 50px auto;
+}
+
+.auth-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+
+	margin-bottom: 2rem;
+	font-size: 2rem;
+}
+
+/* 足跡まとめ */
+.paw-group {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.auth-title .paw-group {
+	position: static;
+	color: var(--sub-color);
+	font-size: 0.9rem;
+}
+
+.pow1 {
+	transform: rotate(80deg);
+}
+
+.pow2 {
+	transform: translateY(-8px) rotate(100deg);
+}
+
+.left-pow2 {
+	transform: translateY(8px) rotate(100deg);
+}
+
+.pow3 {
+	transform: rotate(80deg);
+}
+
+.auth-container {
+	display: flex;
+	padding: 0 40px;
+}
+
+/*カード全体*/
+.auth-card {
+	height: 400px;
+	flex: 1;
+	border: 1px solid rgb(199, 199, 199);
+	background-color: rgb(255, 255, 255);
+}
+
+.card-header-right {
+	margin-right: 10px;
+	margin-left: 70px;
+}
+
+.card-header-left {
+	margin-right: 70px;
+	margin-left: 10px;
+}
+
+/*カードの中*/
+.auth-card-header {
+	padding: 20px;
+	border-bottom: 1px solid rgb(199, 199, 199, 0.4);
+	background: #f5f5f5;
+	text-align: center;
+
+	font-size: 20px;
+}
+
+.auth-card-body {
+	padding: 10px 30px;
+	text-align: center;
+}
+
+.auth-card-title {
+	margin-bottom: 40px;
+
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
+	color: rgb(255, 128, 128);
+	font-weight: bold;
+}
+
+.auth-card-text {
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.auth-card-button {
+	display: inline-block;
+
+	padding: 0.8rem 4rem;
+	border: none;
+
+	box-shadow: 0 6px 0 var(--sub-color);
+	background-color: var(--pinksub-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+	
+	text-decoration: none;
+	color: var(--font-main-color);
+}
+
+.auth-card-button:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--sub-color);
+}

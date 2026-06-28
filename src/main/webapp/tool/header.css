@@ -22,13 +22,13 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 80px;
     background:var(--main-color);
     z-index: 1000;
 }
 
 body {
-    padding-top: 60px;
+    padding-top: 70px;
 }
 
 .header{
@@ -38,18 +38,18 @@ body {
 }
 
 .header-logo img{
-	height: 65px;
-	width: auto;
+	height: 40px;
 }
 
 .header-logo{
 	display: flex;
 	align-items: center;
+	margin-top: 9px;
 }
 
 .header-inner{
-	max-width: 1200px;
-	margin: 0 auto;
+	max-width: 100%;
+	margin: 0;
 	padding: 10px 20px;
 	
 	display: flex;
@@ -64,38 +64,48 @@ body {
 	justify-content: center;
 }
 
+
 .header-serch form{
 	display: flex;
 	align-items: center;
-	gap: 10px;
 }
 
-.header-serch input[type="text"]{
-	width: 350px;
-	padding: 10px 15px;
+.header-serch input{
+	width: 500px;
+	padding: 15px 15px;
 	border-radius: 25px;
 	border: 1px solid #ccc;
+	
+	font-size: 15px;
+	outline: none;
+}
+
+.header-serch input:focus{
+	border: 1.5px solid var(--pinksub-color);
 }
 
 .header-serch button{
 	padding: 10px 20px;
 	border: none;
 	border-radius: 25px;
-	background: #ddd;
 	cursor: pointer;
+	
+	background: transparent;
+}
+
+.fa-search{
+	font-size: 25px;
 }
 
 .header-icons{
 	display: flex;
 	gap: 20px;
-	font-size:20px;
+	font-size:25px;
+	margin-right: 20px;
 }
 
 .header-icons a{
 	color: var(--sub-color);
 }
-
-
-
 
 

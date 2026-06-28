@@ -29,18 +29,24 @@ public class MenuAction extends Action {
 		 */
 		PurchaseDAO dao = new PurchaseDAO();
 		List<PurchaseProductBean> history = dao.historySerch(user.getId());
-		Map<String, List<PurchaseProductBean>> historyMap = new LinkedHashMap<>();
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		
-		for (PurchaseProductBean p : history) {
-			
-			String date = p.getRegistdate().format(formatter);
-			
-			 historyMap.computeIfAbsent(date, k -> new ArrayList<>())
-             .add(p);
-		}
+		Map<String, Map<String, List<PurchaseProductBean>>> historyMap = new LinkedHashMap<>();
 
+		for (PurchaseProductBean p : history) {
+		    String date =
+		        p.getRegistdate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+		    String time =
+		    		 p.getRegistdate().format(DateTimeFormatter.ofPattern("HH:mm"));
+
+		    historyMap
+		        .computeIfAbsent(date,
+		            k -> new LinkedHashMap<>())
+		        .computeIfAbsent(time,
+		            k -> new ArrayList<>())
+		        .add(p);
+		}
+		
 		session.setAttribute("historyMap", historyMap);
 
 		if ("ADMIN".equals(user.getRole()))

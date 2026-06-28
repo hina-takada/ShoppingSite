@@ -22,13 +22,14 @@ public class ProductAddAction extends Action {
 
 		String name = request.getParameter("name");
 		String categoryIdS = request.getParameter("categoryId");
+		String pawIdS = request.getParameter("pawId");
 		String priceS = request.getParameter("price");
-		String countS = request.getParameter("count");
+		String stockS = request.getParameter("stock");
 		String description = request.getParameter("description");
 
 		//バリデーション
-		String url = validation(name, categoryIdS, priceS, countS, description);
-		if (url.equals("prouduct-error.jsp"))
+		String url = validation(name, categoryIdS,pawIdS, priceS, stockS, description);
+		if (url.equals("prouduct-add-error.jsp"))
 			return url;
 
 		//name属性がpictのファイルをPartオブジェクトとして取得
@@ -63,22 +64,23 @@ public class ProductAddAction extends Action {
 
 		//数字に変換
 		int price = Integer.parseInt(priceS);
-		int count = Integer.parseInt(countS);
+		int stock = Integer.parseInt(stockS);
 		int categoryId = Integer.parseInt(categoryIdS);
+		int pawId = Integer.parseInt(pawIdS);
 
 		ProductDAO dao = new ProductDAO();
-		boolean line = dao.insert(name, price, count, categoryId, description, filename);
+		boolean line = dao.insert(name, price, stock, categoryId, description, filename,pawId);
 
 		if (line == false)
-			return "product-error.jsp";
+			return "product-add-error.jsp";
 
 		return "product-add-success.jsp";
 	}
 
 	//入力バリデーション
-	private String validation(String name, String category, String price, String count, String description)
+	private String validation(String name, String category,String pawId, String price, String stock, String description)
 			throws Exception {
-		String url = "product-error.jsp";
+		String url = "product-add-error.jsp";
 
 		/**
 		 * 商品名
@@ -98,10 +100,25 @@ public class ProductAddAction extends Action {
 		}
 
 		int numCate = Integer.parseInt(category);
-		if (numCate < 1 || numCate > 3) {
+		if (numCate < 1 || numCate > 4) {
 			System.out.println("categoryNameエラー");
 			return url;
 		}
+		
+		/**
+		 * 肉球
+		 */
+		if (pawId == null || pawId.isEmpty()) {
+			System.out.println("pawIdエラー");
+			return url;
+		}
+
+		int pawnum = Integer.parseInt(pawId);
+		if (pawnum < 1 || pawnum > 4) {
+			System.out.println("pawIdエラー");
+			return url;
+		}
+		
 		/**
 		 * 価格
 		 */
@@ -119,14 +136,15 @@ public class ProductAddAction extends Action {
 		/**
 		 * 個数
 		 */
-		if (count == null || count.isEmpty()) {
-			System.out.println("countエラー");
+		if (stock == null || stock.isEmpty()) {
+			System.out.println("stockエラー");
 			return url;
 		}
 
-		int numCou = Integer.parseInt(count);
-		if (numCou < 0 || numCou > 9999) {
-			System.out.println("count範囲エラー");
+		int numStock = Integer.parseInt(stock);
+
+		if (numStock < 0 || numStock > 9999) {
+			System.out.println("stock範囲エラー");
 			return url;
 		}
 		

@@ -18,6 +18,10 @@ public class HomeSerchAction extends Action{
 		HttpSession session = request.getSession();
 		String keyword = request.getParameter("keyword");
 		
+		if(keyword == null || keyword.isBlank() || keyword.isEmpty()) {
+			return "HomeProduct.action";
+		}
+		
 		ProductDAO dao = new ProductDAO();
 		List<ProductBean> products = (List<ProductBean>) dao.serch(keyword);
 		

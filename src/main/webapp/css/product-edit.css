@@ -1,22 +1,441 @@
 @charset "UTF-8";
 
-.error{
-	color: red;
-	font-size: 12px;
+* {
+	box-sizing: border-box;
+	font-family: "M PLUS Rounded 1c", sans-serif;
 }
 
-.is-hidden{
-	display: none;
+:root {
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+
+	--button-color: rgb(235, 235, 235);
+	--button-font: rgb(192, 192, 192);
+
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
 }
 
-#vali-btu:disabled {
-	background-color: aliceblue;
-	cursor: not-allowed;
+body {
+
+	margin: 0;
+
+	background-color: var(--main-color);
+
+	color: var(--font-main-color);
+
 }
 
-.field,.checkbox{
+
+
+/* タイトル */
+
+h1 {
+
+	text-align: center;
+
+	margin: 40px;
+
+	font-size: 2rem;
+
+	color: var(--font-main-color);
+
+	border-bottom: 1px solid var(--pinksub-color);
+
+	padding-bottom: 10px;
+
+}
+
+
+
+/* フォーム */
+
+form {
+
+
+	width: 700px;
+
+
+	margin: auto;
+
+
+	background: white;
+
+
+	padding: 40px;
+
+
+	border-radius: 25px;
+
+
+	box-shadow:
+
+		0 8px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+
+/* 入力項目 */
+
+.field {
+
+
 	display: flex;
+
+
 	flex-direction: column;
-	margin-bottom: 5px;
-	width: 14rem;
+
+
+	margin-bottom: 20px;
+
+
+}
+
+
+
+.field input[type="text"],
+.field input[type="number"],
+.field textarea {
+
+
+	width: 100%;
+
+
+	padding: 0.8rem;
+
+
+	background: #fff7f0;
+
+
+	border: none;
+
+
+	border-radius: 15px;
+
+
+	outline: none;
+
+
+	font-size: 1rem;
+
+
+}
+
+
+
+.field input:focus,
+.field textarea:focus {
+
+
+	border: 1px solid rgb(255, 128, 128);
+
+
+}
+
+
+
+
+
+textarea {
+
+
+	min-height: 150px;
+
+
+	resize: none;
+
+
+}
+
+
+
+
+
+/* ラジオ */
+
+.checkbox {
+
+
+	display: flex;
+
+
+	flex-wrap: wrap;
+
+
+	gap: 10px;
+
+
+	margin-bottom: 20px;
+
+
+}
+
+
+
+.checkbox label {
+
+
+	padding: 0.6rem 1rem;
+
+
+	background: white;
+
+
+	border: 1px solid rgb(192, 192, 192);
+
+
+	border-radius: 999px;
+
+
+	cursor: pointer;
+
+
+	transition: .2s;
+
+
+}
+
+
+
+.checkbox label:hover {
+
+
+	background: rgb(255, 240, 245);
+
+
+}
+
+
+
+/* ラジオ選択中 */
+
+.checkbox input[type="radio"]:checked+* {
+
+
+	color: #d98b99;
+
+
+}
+
+
+
+.checkbox input {
+
+
+	margin-right: 5px;
+
+
+}
+
+
+
+
+
+/* エラー */
+
+.error {
+
+	color: red;
+
+	font-size: 12px;
+
+}
+
+
+
+.is-hidden {
+
+	display: none;
+
+}
+
+
+
+
+
+/* 登録ボタン */
+
+#vail-btu {
+
+
+	display: block;
+
+
+	margin: 30px auto 10px;
+
+
+	border: none;
+
+
+	padding: 0.8rem 12rem;
+
+
+	border-radius: 999px;
+
+
+	background: var(--pinksub-color);
+
+
+	color: var(--font-main-color);
+
+
+	font-size: 1rem;
+
+
+	box-shadow:
+
+		0 6px 0 var(--sub-color);
+
+
+	cursor: pointer;
+
+
+	transition: .2s;
+
+
+}
+
+
+
+
+#vail-btu:active {
+
+
+	transform: scale(0.92) translateY(5px);
+
+
+	box-shadow:
+
+		0 2px 0 var(--sub-color);
+
+
+}
+
+
+
+
+#vail-btu:disabled {
+
+
+	background: var(--button-color);
+
+
+	color: var(--button-font);
+
+
+	box-shadow: none;
+
+
+	cursor: not-allowed;
+
+
+}
+
+
+
+
+
+
+/* ファイル */
+
+input[type="file"] {
+
+
+	padding: 0.6rem;
+
+
+	background: white;
+
+
+	border: 1px solid rgb(192, 192, 192);
+
+
+	border-radius: 10px;
+
+
+}
+
+
+
+
+
+/* 画像 */
+
+img {
+
+
+	display: block;
+
+
+	margin: 20px auto;
+
+
+	border-radius: 15px;
+
+
+}
+
+
+
+
+
+/* 戻る */
+
+a {
+
+
+	display: block;
+
+
+	width: 400px;
+
+
+	margin: 30px auto 60px;
+
+
+	text-align: center;
+
+
+	padding: 0.8rem;
+
+
+	text-decoration: none;
+
+
+	color: var(--font-main-color);
+
+
+	background: var(--back-color);
+
+
+	border-radius: 999px;
+
+
+	box-shadow:
+
+		0 6px 0 var(--back-shadow);
+
+
+	transition: .2s;
+
+
+}
+
+
+
+a:active {
+
+
+	transform: scale(0.92) translateY(5px);
+
+
+	box-shadow:
+
+		0 2px 0 var(--back-shadow);
+
+
 }

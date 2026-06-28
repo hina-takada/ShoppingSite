@@ -18,9 +18,10 @@ public class ProductSortAction extends Action {
 
 		String sort = request.getParameter("sort");
 		String[] categorys = request.getParameterValues("category");
+		String[] paws = request.getParameterValues("paws");
 
 		ProductSortDAO dao = new ProductSortDAO();
-		List<ProductBean> productList = dao.serch(categorys, sort);
+		List<ProductBean> productList = dao.serch(categorys,paws, sort);
 
 		session.setAttribute("products", productList);
 

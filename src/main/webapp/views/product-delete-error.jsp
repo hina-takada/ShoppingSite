@@ -8,18 +8,18 @@
 
 <div class="error-main">
 
-<h2 class="error-title">商品編集エラー</h2>
+<h2 class="error-title">商品削除エラー</h2>
 <main class="error-card">
 
 	<img src="../img/error_img.jpg">
 
 	<div class="error-text">
-		<p>商品の編集ができませんでした</p>
+		<p>商品削除ができませんでした</p>
 
 
 		<div class="back-link">
 			<span class="icon"> <i class="fas fa-arrow-right"></i>
-			</span><a href="admin-menu.jsp">管理者画面へ戻る</a>
+			</span><a href="product-menu.jsp">商品管理画面へ戻る</a>
 		</div>
 	</div>
 

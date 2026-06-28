@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+* {
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: weight;
+	font-style: normal;
+}
+
+:root {
+	--main-color: rgb(253, 244, 230);
+	--warning-red: rgb(226, 88, 102);
+	--font-red: rgb(214, 37, 55);
+	--warning-red-shadow: rgb(219, 47, 64);
+	--warning-background: #fff5f5;
+	--warning-white: white;
+
+	--main-color: rgb(253, 244, 230);
+	--sub-color: #d98b99;
+	--pinksub-color: #FFB6C1;
+	--font-main-color: rgb(50, 26, 7);
+	--back-color: rgb(135, 176, 209);
+	--back-shadow: rgb(95, 165, 194);
+}
+
+body {
+	margin: 0;
+	background-color: var(--main-color);
+}
+
+.delete-main {
+	max-width: 600px;
+	margin: 50px auto;
+	text-align: center;
+}
+
+.warning-box {
+	border: 2px solid;
+	padding: 20px;
+	margin: 30px 0 var(--warning-red);
+	background: var(--warning-background);
+}
+
+.warning-box table {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	text-align: left;
+	/* 表の中身を左揃え */
+	padding: 10px 20px;
+}
+
+.warning-message {
+	color: var(--font-red);
+	font-weight: bold;
+}
+
+.button-area {
+	display: grid;
+	place-items: center;
+	margin-top: 0.8rem;
+	padding-bottom: 1.5rem;
+	gap: 20px;
+	
+}
+
+.button-area .delete-btn {
+	color: var(--font-main-color);
+	font-size: 14px;
+
+	box-shadow: 0 6px 0 var(--warning-red-shadow);
+	background-color: var(--warning-red);
+	border-radius: 999px;
+	transition: 0.2s ease;
+
+	padding: 0.8rem 10rem;
+	border: none;
+
+	cursor: pointer;
+}
+
+.button-area .cancel-btn {
+	color: var(--font-main-color);
+	font-size: 14px;
+
+	box-shadow: 0 6px 0 var(--back-shadow);
+	background-color: var(--back-color);
+	border-radius: 999px;
+	transition: 0.2s ease;
+
+	padding: 0.8rem 10rem;
+	border: none;
+
+	cursor: pointer;
+}
+
+.button-area .delete-btn:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--warning-red-shadow);
+}
+
+.button-area .cancel-btn:active {
+	transform: scale(0.92) translateY(5px);
+	box-shadow: 0 2px 0 var(--back-shadow);
+}

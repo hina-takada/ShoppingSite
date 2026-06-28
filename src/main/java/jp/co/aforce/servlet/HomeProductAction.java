@@ -19,6 +19,7 @@ public class HomeProductAction extends Action{
 		
 		String form = request.getParameter("form");
 		
+		
 		ProductDAO dao = new ProductDAO();
 		List<ProductBean> products = dao.serch();
 		

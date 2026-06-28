@@ -9,9 +9,12 @@ public class ProductBean implements java.io.Serializable{
 	private int productId;//商品ID
 	private String name;//商品名
 	private int price;//価格
-	private int count;//個数
+	private int stock;//在庫数
 	private int categoryId;//カテゴリーID
 	private String categoryName;//カテゴリー名
+	private int pawId;//肉球の感触
+	private String pawName;//肉球の感触
+	private String pawDescription;//肉球の感触　説明
 	private String description;//説明文
 	private String fileName;//画像のパス
 	/**
@@ -63,15 +66,16 @@ public class ProductBean implements java.io.Serializable{
 	
 	
 	/**
-	 * 個数
+	 * 在庫数
 	 * 
 	 * @return
 	 */
-	public int getCount() {
-		return count;
+	public int getStock() {
+	    return stock;
 	}
-	public void setCount(int count) {
-		this.count = count;
+
+	public void setStock(int stock) {
+	    this.stock = stock;
 	}
 	
 	
@@ -99,6 +103,38 @@ public class ProductBean implements java.io.Serializable{
 		this.categoryName = string;
 	}
 	
+	/**
+	 * 肉球感触
+	 * @return
+	 */
+	public int getPawId() {
+		return pawId;
+	}
+	public void setPawId(int pawId) {
+		this.pawId = pawId;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getPawName() {
+		return pawName;
+	}
+	public void setPawName(String pawName) {
+		this.pawName = pawName;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getPawDescription() {
+		return pawDescription;
+	}
+	public void setPawDescription(String pawDescription) {
+		this.pawDescription = pawDescription;
+	}
 	
 	/**
 	 * 商品説明
@@ -125,16 +161,6 @@ public class ProductBean implements java.io.Serializable{
 		this.fileName = fileName;
 	}
 	
-	/**
-	 * 注文番号
-	 * @return
-	 */
-	/*public int getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(int  orderId) {
-		this.orderId = orderId;
-	}*/
 	
 	/**
 	 * 入力した月日

@@ -1,16 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>商品登録エラー</title>
-</head>
-<body>
-	
-	<h1>商品登録できません</h1>
-	
-	<a href="product-add.jsp"></a>
-	
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%-- JSヘッダー --%>
+<c:set var="pageTitle" value="商品登録エラー画面"></c:set>
+<c:set var="cssFile" value="/css/error.css"></c:set>
+<%@ include file="../tool/js-header.jsp"%>
+<div class="error-main">
+
+	<h2 class="error-title">登録エラー</h2>
+	<main class="error-card">
+
+		<img src="../img/error_img.jpg">
+
+		<div class="error-text">
+
+			<p>登録できませんでした</p>
+
+			<div class="back-link">
+				<span class="icon"> <i class="fas fa-arrow-right"></i>
+				</span><a href="product-add.jsp">登録画面へ戻る</a>
+			</div>
+
+		</div>
+
+	</main>
+</div>
+
+
 </body>
 </html>
